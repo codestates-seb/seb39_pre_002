@@ -20,8 +20,9 @@ function App() {
 export const AppMain = styled.div`
   #side--Body {
     display: flex;
-    width: 100vw;
-    height: 194vh;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
   }
 `;
 
