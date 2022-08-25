@@ -1,15 +1,28 @@
-import "./App.css";
+import styled from "styled-components";
+import Body from "./Body";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <AppMain>
+      <div id="header">
+        <Header />
+      </div>
+      <div id="side--Body">
+        <Sidebar />
+        <Body />
+      </div>
+    </AppMain>
   );
 }
+
+export const AppMain = styled.div`
+  #side--Body {
+    display: flex;
+    width: 100vw;
+    height: 194vh;
+  }
+`;
 
 export default App;
