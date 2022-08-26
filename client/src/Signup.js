@@ -116,7 +116,7 @@ function Signup() {
 }
 export const Main = styled.div`
   width: 100vw;
-  background-color: hsl(210deg 8% 85%);
+  background-color: #f1f2f3;
   .content {
     padding: 24px;
   }

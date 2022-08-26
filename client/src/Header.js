@@ -2,6 +2,7 @@ import styled from "styled-components";
 function header() {
   return (
     <Main>
+      {/* <hr size="5" color="orange" align="top" /> */}
       <div className="header-container">
         <a>
           (이미지)stack<b>overflow</b>
@@ -20,7 +21,7 @@ function header() {
   );
 }
 export const Main = styled.div`
-  background-color: gray;
+  background-color: #f8f9f9;
   font-size: unset;
   display: flex;
   justify-content: center;
@@ -28,6 +29,8 @@ export const Main = styled.div`
   display: inline-block;
 
   .header-container {
+    border-top: 3px solid #f48225;
+
     display: flex;
     align-items: center;
     justify-content: center;

@@ -62,6 +62,7 @@ function Body() {
 }
 
 export const Main = styled.div`
+  border-left: 1px, solid, gray;
   /* background-color: rgba(255, 50, 50, 0.3); */
   width: 60vw;
   .body-top {

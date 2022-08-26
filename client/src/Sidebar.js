@@ -34,7 +34,7 @@ function Sidebar() {
   );
 }
 export const Main = styled.div`
-  background-color: gray;
+  /* background-color: gray; */
   ol {
     list-style: none;
     margin-top: 30px;
