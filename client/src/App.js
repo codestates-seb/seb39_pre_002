@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Body from "./Body";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import Signup from "./Signup";
 
 function App() {
   return (
@@ -9,10 +10,11 @@ function App() {
       <div id="header">
         <Header />
       </div>
-      <div id="side--Body">
+      {/* <div id="side--Body">
         <Sidebar />
         <Body />
-      </div>
+      </div> */}
+      <Signup></Signup>
     </AppMain>
   );
 }
