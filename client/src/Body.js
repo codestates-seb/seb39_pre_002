@@ -5,7 +5,7 @@ function Body() {
       <div className="body-top">
         <h1>All Questions</h1>
         <div>
-          <a>Ask Question</a>
+          <a className="askQuestion">Ask Question</a>
         </div>
       </div>
       <div className="body-middle">
@@ -65,6 +65,7 @@ export const Main = styled.div`
   border-left: 1px, solid, gray;
   /* background-color: rgba(255, 50, 50, 0.3); */
   width: 60vw;
+  border-left: 1px solid #d6d9dc;
   .body-top {
     display: flex;
   }
@@ -73,6 +74,25 @@ export const Main = styled.div`
     .body-middle-tab {
       display: flex;
     }
+  }
+  .askQuestion {
+    font-size: 13px;
+    line-height: 15px;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-align: center;
+    white-space: nowrap;
+    word-spacing: 0px;
+
+    background-color: #0074cc;
+    background-position: 0% 0%;
+    color: #ffffff;
+
+    height: 37.8px;
+    width: 100px;
+    border: 1px solid #ffffff;
+    padding: 10px 10px 10px 10px;
+
+    cursor: pointer;
   }
 `;
 

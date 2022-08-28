@@ -10,11 +10,11 @@ function App() {
       <div id="header">
         <Header />
       </div>
-      <div id="side--Body">
+      {/* <div id="side--Body">
         <Sidebar />
         <Body />
-      </div>
-      {/* <Signup /> */}
+      </div> */}
+      <Signup />
     </AppMain>
   );
 }
