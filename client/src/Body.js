@@ -1,5 +1,9 @@
+import Question from "./Question";
 import styled from "styled-components";
-function Body() {
+
+function Body({ data }) {
+  function handleClick(event, id) {}
+
   return (
     <Main>
       <div className="body-top">
@@ -33,30 +37,13 @@ function Body() {
           </div>
         </div>
       </div>
-      <div className="body-main">
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-        뿌려줄 데이터
-        <br />
-      </div>
+      {data !== null ? (
+        <div className="body-main">
+          {data.map((data) => (
+            <Question data={data} key={data.id} handleClick={handleClick} />
+          ))}
+        </div>
+      ) : null}
     </Main>
   );
 }
