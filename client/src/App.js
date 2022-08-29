@@ -16,7 +16,7 @@ function App() {
         setData(data);
       });
   }, []);
-
+  console.log(1);
   return (
     <AppMain>
       <div id="header">
