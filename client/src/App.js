@@ -1,9 +1,14 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Body from "./Body";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Signup from "./Signup";
+import CreateQuestion from "./CreateQuestion";
+import QuestionDetail from "./QuestionDetail";
+import ModifyQuestion from "./ModifyQuestion";
+import Login from "./Login";
 
 function App() {
   const [data, setData] = useState(null);
@@ -16,19 +21,25 @@ function App() {
         setData(data);
       });
   }, []);
-  console.log(1);
+
   return (
-    <AppMain>
-      <div id="header">
-        <Header />
-      </div>
-      <div id="side--Body">
-        <Sidebar />
-        <Body data={data} />
-      </div>
-      {/* <Signup /> */}
-    </AppMain>
-  );
+    <BrowserRouter>
+      <AppMain>
+        <Header /> 
+        <div id="side--Body">          
+        <Sidebar />     
+        <Routes>          
+          <Route path="/" element={<Body data={data} />} />          
+          <Route path="/signup" element={<Signup />} />            
+          <Route path="/login" element={<Login />} />
+          <Route path="/create" element={<CreateQuestion />} /> 
+          <Route path="/modify" element={<ModifyQuestion />} /> 
+          <Route path="/question/:id" element={<QuestionDetail />} /> 
+        </Routes> 
+        </div>              
+      </AppMain>
+    </BrowserRouter>  
+    );
 }
 
 export const AppMain = styled.div`

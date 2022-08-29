@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 function header() {
   return (
@@ -6,7 +7,7 @@ function header() {
       <div className="header-container">
         <a className="flex align">
           <span className="marginUp">
-            <svg
+          <Link to ="/"><svg
               aria-hidden="true"
               class="native svg-icon iconLogoMd"
               width="150"
@@ -22,7 +23,7 @@ function header() {
                 d="m23.1 25.99.68-2.95-16.1-3.35L7 23l16.1 2.99ZM9.1 15.2l15 7 1.4-3-15-7-1.4 3Zm4.2-7.4L26 18.4l2.1-2.5L15.4 5.3l-2.1 2.5ZM21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0ZM7 30h16v-3H7v3Z"
                 fill="#F48024"
               ></path>
-            </svg>
+            </svg></Link>
           </span>
         </a>
         <a className="products gray">Products</a>

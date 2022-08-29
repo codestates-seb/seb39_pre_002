@@ -1,5 +1,6 @@
 import Question from "./Question";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function Body({ data }) {
   function handleClick(event, id) {}
@@ -9,7 +10,7 @@ function Body({ data }) {
       <div className="body-top">
         <h1>All Questions</h1>
         <div>
-          <a className="askQuestion">Ask Question</a>
+        <Link to="/create"><button className="askQuestion">Ask Question</button></Link>
         </div>
       </div>
       <div className="body-middle">

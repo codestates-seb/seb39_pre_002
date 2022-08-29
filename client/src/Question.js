@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function Question({ data, key, handleClick }) {
   return (
@@ -24,7 +25,7 @@ export default function Question({ data, key, handleClick }) {
       </div>
       <div>
         <h3>
-          <a href="">{data.title}</a>
+          <Link to={`/question/${data.id}`}>{data.title}</Link>
         </h3>
         <div>
           <div>
