@@ -27,12 +27,14 @@ export default function Question({ data, key, handleClick }) {
         <h3>
           <Link to={`/question/${data.id}`}>{data.title}</Link>
         </h3>
-        <div>
+        <div className="body-bottom">
           <div>
-            <a>tags(map)</a>
+            {data.hashtag.map((data) => (
+              <a className="tags">{data}</a>
+            ))}
           </div>
 
-          <div>
+          <div className="body-bottom-right">
             <a href="">
               <div>
                 <img
@@ -82,6 +84,43 @@ export const Body = styled.div`
   border-bottom: 1px solid #e3e6e8;
   padding: 16px 16px 16px 16px;
   display: flex;
+
+  .tags {
+    background-color: #d0e3f1;
+    color: #2c5877;
+    height: 23.5938px;
+    /* width: 68.7031px; */
+    border: 1px solid #ffffff;
+    margin: 0 4px 4px 0;
+    padding: 5px 6px 5px 5px;
+  }
+  .body-bottom {
+    width: 700px;
+    display: flex;
+  }
+  .body-bottom-right {
+    /* padding-left: 40px; */
+    justify-content: flex-end;
+    display: flex;
+  }
+  ul {
+    padding-left: 0px;
+  }
+  li {
+    list-style: none;
+  }
+  a {
+    color: #0a95ff;
+    text-decoration: none;
+  }
+  a:visited {
+    color: #0a95ff;
+  }
+
+  h3 {
+    margin: 0 0 10px 0;
+    font-weight: 500;
+  }
 `;
 
 {

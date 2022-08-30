@@ -1,59 +1,73 @@
 import Question from "./Question";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 function Body({ data }) {
   function handleClick(event, id) {}
 
   return (
     <Main>
-      <div className="body-top">
-        <h1>All Questions</h1>
-        <div>
-        <Link to="/create"><button className="askQuestion">Ask Question</button></Link>
-        </div>
-      </div>
-      <div className="body-middle">
-        <div>22,935,667 questions</div>
-        <div>
+      <Sidebar />
+      <div className="body">
+        <div className="body-top">
+          <h1>All Questions</h1>
           <div>
-            <div className="body-middle-tab">
-              <a>
-                <div>Newest</div>
-              </a>
-              <a>
-                <div>Active</div>
-              </a>
-              <a>
-                <div>Bountied 317</div>
-              </a>
-              <a>
-                <div>Unanswered</div>
-              </a>
-              <button>more ▼</button>
-            </div>
+            <Link to="/create">
+              <button className="askQuestion">Ask Question</button>
+            </Link>
+          </div>
+        </div>
+        <div className="body-middle">
+          <div>22,935,667 questions</div>
+          <div>
             <div>
-              <button>filter</button>
+              <div className="body-middle-tab">
+                <a>
+                  <div>Newest</div>
+                </a>
+                <a>
+                  <div>Active</div>
+                </a>
+                <a>
+                  <div>Bountied 317</div>
+                </a>
+                <a>
+                  <div>Unanswered</div>
+                </a>
+                <button>more ▼</button>
+              </div>
+              <div>
+                <button>filter</button>
+              </div>
             </div>
           </div>
         </div>
+        {data !== null ? (
+          <div className="body-main">
+            {data.map((data) => (
+              <Question data={data} key={data.id} handleClick={handleClick} />
+            ))}
+          </div>
+        ) : null}
       </div>
-      {data !== null ? (
-        <div className="body-main">
-          {data.map((data) => (
-            <Question data={data} key={data.id} handleClick={handleClick} />
-          ))}
-        </div>
-      ) : null}
     </Main>
   );
 }
 
 export const Main = styled.div`
-  border-left: 1px, solid, gray;
-  /* background-color: rgba(255, 50, 50, 0.3); */
-  width: 60vw;
-  border-left: 1px solid #d6d9dc;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+
+  .body {
+    border-left: 1px, solid, gray;
+    /* background-color: rgba(255, 50, 50, 0.3); */
+    width: 60vw;
+    border-left: 1px solid #d6d9dc;
+  }
+
   .body-top {
     display: flex;
   }
