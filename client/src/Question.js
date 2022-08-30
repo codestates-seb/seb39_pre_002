@@ -109,6 +109,18 @@ export const Body = styled.div`
   li {
     list-style: none;
   }
+  a {
+    color: #0a95ff;
+    text-decoration: none;
+  }
+  a:visited {
+    color: #0a95ff;
+  }
+
+  h3 {
+    margin: 0 0 10px 0;
+    font-weight: 500;
+  }
 `;
 
 {
