@@ -26,6 +26,7 @@ public class QuestionsController {
         this.questionsService = questionsService;
         this.mapper = mapper;
     }
+
     @PostMapping
     public ResponseEntity postQuestions(@Valid @RequestBody QuestionsPostDto questionsPostDto) {
 

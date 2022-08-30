@@ -50,7 +50,6 @@ public class QuestionsService {
         questionsRepository.delete(findQuestions);
     }
 
-
     //존재하는 질문인지 검증  이부분은 이해 불가 ㅠㅠ
     public Questions findVerifiedQuestions(long questionsId) {
         Optional<Questions> optionalQuestions =
