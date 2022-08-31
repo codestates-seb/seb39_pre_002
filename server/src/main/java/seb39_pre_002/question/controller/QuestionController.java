@@ -26,7 +26,7 @@ import java.util.List;
 @Validated //유효성 검증 - dto에서 아직 안 넣음
 @Slf4j
 public class QuestionController {
-    private final QuestionService questionService;
+    private final QuestionService questionService; //생성자 만듬
     private final QuestionMapper questionMapper;
 
     public QuestionController(QuestionService questionService, QuestionMapper questionMapper) {

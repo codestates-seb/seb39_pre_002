@@ -21,7 +21,7 @@ public class Member {
     private long memberId;
 
     @Column(nullable = false, updatable = false, unique = true)
-    private String email;
+    private String memberEmail;
 
     @Column(length = 16, nullable = false, unique = true)
     private String memberName;
@@ -41,12 +41,12 @@ public class Member {
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
 
-    public Member(String email) {
-        this.email = email;
+    public Member(String memberEmail) {
+        this.memberEmail = memberEmail;
     }
 
-    public Member(String email, String memberName, String memberPassword) {
-        this.email = email;
+    public Member(String mebmerEmail, String memberName, String memberPassword) {
+        this.memberEmail = mebmerEmail;
         this.memberName = memberName;
         this.memberPassword = memberPassword;
     }

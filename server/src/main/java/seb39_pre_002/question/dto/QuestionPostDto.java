@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 @Getter
 public class QuestionPostDto {
 
-    private String title;
-    private String content;
-    private String hashtag; //해시태크 나중에 하기
+    private String questionTitle;
+    private String questionContent;
+    private String questionHashtag; //해시태크 나중에 하기
     private LocalDateTime createdAt; //질문시간기록
 //    private String memberName; // 질문자 맴버랑 연결 필요 - 하나의 맴버가 여러개의 질문을 할 수 있음
 

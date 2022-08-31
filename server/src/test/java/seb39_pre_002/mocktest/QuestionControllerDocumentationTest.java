@@ -96,26 +96,26 @@ public class QuestionControllerDocumentationTest implements QuestionControllerTe
         //then
         actions
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.data.title").value(post.getTitle()))
-                .andExpect(jsonPath("$.data.content").value(post.getContent()))
-                .andExpect(jsonPath("$.data.hashtag").value(post.getHashtag()))
+                .andExpect(jsonPath("$.data.questionTitle").value(post.getQuestionTitle()))
+                .andExpect(jsonPath("$.data.questionContent").value(post.getQuestionContent()))
+                .andExpect(jsonPath("$.data.questionHashtag").value(post.getQuestionHashtag()))
                 .andDo(document("post-question",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 List.of(
-                                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목"),
-                                        fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
-                                        fieldWithPath("hashtag").type(JsonFieldType.STRING).description("해시태크")
+                                        fieldWithPath("questionTitle").type(JsonFieldType.STRING).description("제목"),
+                                        fieldWithPath("questionContent").type(JsonFieldType.STRING).description("내용"),
+                                        fieldWithPath("questionHashtag").type(JsonFieldType.STRING).description("해시태크")
                                 )
                         ),
                         responseFields(
                                 Arrays.asList(
                                         fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터").optional(),
                                         fieldWithPath("data.questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
-                                        fieldWithPath("data.title").type(JsonFieldType.STRING).description("제목"),
-                                        fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
-                                        fieldWithPath("data.hashtag").type(JsonFieldType.STRING).description("해시태그")
+                                        fieldWithPath("data.questionTitle").type(JsonFieldType.STRING).description("제목"),
+                                        fieldWithPath("data.questionContent").type(JsonFieldType.STRING).description("내용"),
+                                        fieldWithPath("data.questionHashtag").type(JsonFieldType.STRING).description("해시태그")
                                 )
                         )
                 ));
@@ -193,9 +193,9 @@ public class QuestionControllerDocumentationTest implements QuestionControllerTe
         actions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.questionId").value(patch.getQuestionId()))
-                .andExpect(jsonPath("$.data.title").value(patch.getTitle()))
-                .andExpect(jsonPath("$.data.content").value(patch.getContent()))
-                .andExpect(jsonPath("$.data.hashtag").value(patch.getHashtag()))
+                .andExpect(jsonPath("$.data.questionTitle").value(patch.getQuestionTitle()))
+                .andExpect(jsonPath("$.data.questionContent").value(patch.getQuestionContent()))
+                .andExpect(jsonPath("$.data.questionHashtag").value(patch.getQuestionHashtag()))
                 .andDo(document("patch-question",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
@@ -242,7 +242,7 @@ public class QuestionControllerDocumentationTest implements QuestionControllerTe
         actions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.questionId").value(questionId))
-                .andExpect(jsonPath("$.data.title").value(response.getTitle()))
+                .andExpect(jsonPath("$.data.questionTitle").value(response.getQuestionTitle()))
                 .andDo(
                         document("get-question",
                                 preprocessRequest(prettyPrint()),
@@ -254,9 +254,9 @@ public class QuestionControllerDocumentationTest implements QuestionControllerTe
                                         Arrays.asList(
                                                 fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터").optional(),
                                                 fieldWithPath("data.questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
-                                                fieldWithPath("data.title").type(JsonFieldType.STRING).description("제목"),
-                                                fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
-                                                fieldWithPath("data.hashtag").type(JsonFieldType.STRING).description("해시태그")
+                                                fieldWithPath("data.questionTitle").type(JsonFieldType.STRING).description("제목"),
+                                                fieldWithPath("data.questionContent").type(JsonFieldType.STRING).description("내용"),
+                                                fieldWithPath("data.questionHashtag").type(JsonFieldType.STRING).description("해시태그")
                                         )
                                 )
                         ));
@@ -321,9 +321,9 @@ public class QuestionControllerDocumentationTest implements QuestionControllerTe
                                                         fieldWithPath("data").type(JsonFieldType.ARRAY).description("결과 데이터")
                                                                 .optional(),
                                                         fieldWithPath("data[].questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
-                                                        fieldWithPath("data[].title").type(JsonFieldType.STRING).description("제목"),
-                                                        fieldWithPath("data[].content").type(JsonFieldType.STRING).description("내용"),
-                                                        fieldWithPath("data[].hashtag").type(JsonFieldType.STRING).description("해시태그"),
+                                                        fieldWithPath("data[].questionTitle").type(JsonFieldType.STRING).description("제목"),
+                                                        fieldWithPath("data[].questionContent").type(JsonFieldType.STRING).description("내용"),
+                                                        fieldWithPath("data[].questionHashtag").type(JsonFieldType.STRING).description("해시태그"),
                                                         fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보")
                                                                 .optional(),
                                                         fieldWithPath("pageInfo.page").type(JsonFieldType.NUMBER).description("페이지 번호")

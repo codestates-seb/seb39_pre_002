@@ -9,7 +9,7 @@ import seb39_pre_002.member.entity.Member;
 
 public class MemberResponseDto {
     private long memberId;
-    private String email;
+    private String mbmerEmail;
     private String memberName;
     private String memberPassword;
 

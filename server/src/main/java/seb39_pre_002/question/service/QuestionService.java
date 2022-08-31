@@ -23,32 +23,28 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
-//    private final ApplicationEventPublisher publisher; //테스트용?
-//    ApplicationEventPublisher publisher
-
     public QuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
-//        this.publisher = publisher;
     }
 
+    //등록
     public Question createQuestion(Question question) {
 
-//        return questionRepository.save(question);
         Question savedQuestion = questionRepository.save(question);
-//
-//        // 추가된 부분
-//        publisher.publishEvent(new QuestionRegistrationApplicationEvent(this, savedQuestion));
+
         return savedQuestion;
     }
 
+
+    //수정
 //    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Question updateQuestion(Question question) {
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
-        Optional.ofNullable(question.getTitle())
-                .ifPresent(title -> question.setTitle(title));
-        Optional.ofNullable(question.getContent())
-                .ifPresent(content -> question.setContent(content));
+        Optional.ofNullable(question.getQuestionTitle())
+                .ifPresent(questionTitle -> question.setQuestionTitle(questionTitle));
+        Optional.ofNullable(question.getQuestionContent())
+                .ifPresent(questionContent -> question.setQuestionContent(questionContent));
 
 //        Optional.ofNullable(question.getQuestionStatus())
 //                .ifPresent(questionStatus -> question.setQuestionStatus(questionStatus));
@@ -57,17 +53,20 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+    //단일조회
     public Question findQuestion(long questionId) {
         return findVerifiedQuestion(questionId);
     }
 
 
+    //조회
     public Page<Question> findQuestions(int page, int size) {
         return questionRepository.findAll(PageRequest.of(page, size,
                 Sort.by("questionId").descending()));
     }
 
 
+    //삭제
     public void deleteQuestion(long questionId) {
         Question findQuestion = findVerifiedQuestion(questionId);
 

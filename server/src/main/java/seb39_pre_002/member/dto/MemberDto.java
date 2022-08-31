@@ -14,12 +14,13 @@ public class MemberDto {
     @AllArgsConstructor // 테스트를 위해 추가
     public static class Post {
 
-        private String email;
+        private String meberEmail;
 
         private String memberName;
 
         private String mebmerPassword;
     }
+
 
     @Getter
     @AllArgsConstructor
@@ -32,17 +33,17 @@ public class MemberDto {
 
         private Member.MemberStatus memberStatus;
 
-
         public void setMemberId(long memberId) {
             this.memberId = memberId;
         }
     }
 
+
     @AllArgsConstructor
     @Getter
     public static class Response {
         private long memberId;
-        private String email;
+        private String memberEmail;
         private String memberName;
         private String memberPassword;
         private Member.MemberStatus memberStatus;

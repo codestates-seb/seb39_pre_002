@@ -24,7 +24,7 @@ public class MemberService {
 
     public Member createMember(Member member) {
         // 이미 등록된 이메일인지 확인
-        verifyExistsEmail(member.getEmail());
+        verifyExistsEmail(member.getMemberEmail());
 
         return memberRepository.save(member);
     }

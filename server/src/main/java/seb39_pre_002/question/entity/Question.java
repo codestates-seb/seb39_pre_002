@@ -20,13 +20,13 @@ public class Question {
 
     @Column(nullable = false)
 //  private String questionTitle;
-    private String title;
+    private String questionTitle;
     @Column(nullable = false)
-    private String content;
+    private String questionContent;
 //    private String questionContent;
 
     @Column
-    private String hashtag; //해시태크 나중에 하기
+    private String questionHashtag; //해시태크 나중에 하기
 
     @Column
     private LocalDateTime createdAt; //질문시간기록 입력값 모르겠음
@@ -39,14 +39,11 @@ public class Question {
 //    @Column(length = 20, nullable = false)
 //    private QuestionStatus  questionStatus = QuestionStatus.Question_Create;
 //
-    public Question(String title, String content, String hashtag) {
+    public Question(String questionTitle, String questionContent, String questionHashtag) {
 
-//        String questionTitle, String questionContent
-        this.title = title;
-        this.content = content;
-//        this.questionTitle = questionTitle;
-//        this.questionContent = questionContent;
-        this.hashtag = hashtag;
+        this.questionTitle = questionTitle;
+        this.questionContent = questionContent;
+        this.questionHashtag = questionHashtag;
     }
 
 //    public enum  QuestionStatus {

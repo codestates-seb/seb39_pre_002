@@ -10,11 +10,11 @@ public class QuestionDto {
     @AllArgsConstructor // 테스트를 위해 추가
     public static class Post {
 
-        private String title;
+        private String questionTitle;
 
-        private String content;
+        private String questionContent;
 
-        private String hashtag;
+        private String questionHashtag;
     }
 
     @Getter
@@ -22,11 +22,11 @@ public class QuestionDto {
     public static class Patch {
         private long questionId;
 
-        private String title;
+        private String questionTitle;
 
-        private String content;
+        private String questionContent;
 
-        private String hashtag;
+        private String questionHashtag;
 
         public void setQuestionId(long questionId) {
             this.questionId = questionId;
@@ -37,9 +37,9 @@ public class QuestionDto {
     @AllArgsConstructor
     public static class Response {
         private long questionId;
-        private String title;
-        private String content;
-        private String hashtag;
+        private String questionTitle;
+        private String questionContent;
+        private String questionHashtag;
 
 
     }
