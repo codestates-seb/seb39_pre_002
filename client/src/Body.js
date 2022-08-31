@@ -19,9 +19,9 @@ function Body({ data }) {
           </div>
         </div>
         <div className="body-middle">
-          <div>22,935,667 questions</div>
+          <div className="questionNubers">22,935,667 questions</div>
           <div>
-            <div>
+            <div className="tab-filter">
               <div className="body-middle-tab">
                 <a>
                   <div>Newest</div>
@@ -68,13 +68,39 @@ export const Main = styled.div`
     border-left: 1px solid #d6d9dc;
   }
 
+  h1 {
+    font-size: 27px;
+    font-weight: 400;
+    margin-left: 20px;
+  }
+
   .body-top {
+    width: 727px;
+    height: 60px;
     display: flex;
+    justify-content: space-between;
+
+    button {
+      margin-top: 20px;
+      background-color: #1095fa;
+      border-radius: 5px;
+    }
   }
   .body-middle {
     display: flex;
+    height: 50px;
+    .questionNubers {
+      width: 260px;
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+    .tab-filter {
+      display: flex;
+    }
     .body-middle-tab {
       display: flex;
+      margin: 5px;
     }
   }
   .askQuestion {

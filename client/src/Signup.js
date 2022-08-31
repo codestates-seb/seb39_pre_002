@@ -52,7 +52,7 @@ function Signup() {
               </div>
               <div>Earn reputation and badges</div>
             </div>
-            <div>
+            <div className="left-bottom">
               Collaborate and share knowledge with a private group for FREE.
               <br />
               <a>Get Stack Overflow for Teams free for up to 50 users</a>.
@@ -192,7 +192,7 @@ function Signup() {
                   <button className="button-sign">Sign up</button>
                 </div>
               </form>
-              <div>
+              <div className="signup-bottom-text">
                 By clicking “Sign up”, you agree to our <a>terms of service</a>,{" "}
                 <a>privacy policy</a> and <a>cookie policy</a>
               </div>
@@ -228,8 +228,9 @@ export const Main = styled.div`
   overflow-x: hidden;
 
   h1 {
-    font-weight: 360;
+    font-weight: 400;
     font-size: 27px;
+    line-height: 27px;
   }
   .content {
     padding: 24px;
@@ -246,8 +247,10 @@ export const Main = styled.div`
     color: #232629;
     height: 312px;
     width: 421px;
-    margin: 0 48px 128px 0;
+    margin: 0 48px 128px -100px;
     max-width: 421px;
+    padding-bottom: 100px;
+    padding-right: 150px;
     svg {
       margin-right: 8px;
       fill: #1095fa;
@@ -262,6 +265,10 @@ export const Main = styled.div`
     width: 421px;
     margin: 0 0 24px 0;
     display: flex;
+  }
+  .left-bottom {
+    font-size: 13px;
+    color: #6a737c;
   }
 
   .content-right {
@@ -281,14 +288,7 @@ export const Main = styled.div`
     display: flex;
     flex-direction: column;
   }
-  /* .button-top {
-    margin: 4px, 0px;
-    padding: 10.4px;
-    width: 316px;
-    height: 38px;
-    margin: 4px 0;
-    padding: 10px;
-  } */
+
   .top-google {
     font-size: 13px;
     line-height: 15px;
@@ -344,13 +344,12 @@ export const Main = styled.div`
     background-color: #ffffff;
     background-position: 0% 0%;
     color: #232629;
-    height: 594px;
     width: 268px;
     margin: 20px 0 24px 0;
     padding: 24px 24px 24px 24px;
     max-width: 316px;
     display: block;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid #dfe0e1;
   }
 
@@ -395,13 +394,19 @@ export const Main = styled.div`
     height: 156px;
     width: 268px;
     border: 1px solid #e3e6e8;
-    margin: 20px 0 6px 0;
+    border-radius: 3px;
+    margin: 30px 0 8px 0;
     padding: 8px 0 2px 0;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
+  .botcheck {
+    height: 144px;
+    width: 164px;
+    border: 1px solid #c1c1c1;
+  }
   .underbot {
     display: flex;
     justify-content: center;
@@ -412,21 +417,25 @@ export const Main = styled.div`
     margin-right: 5px;
   }
 
+  label {
+    font-size: 12px;
+    color: #0c0d0e;
+  }
+
   .button-sign {
     width: 268px;
     height: 38px;
     padding: 10.4px;
-    margin: 2px;
+    margin: 16px 2px 22px 2px;
+    background-color: #1095fa;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
   }
 
-  .botcheck {
-    height: 144px;
-    width: 164px;
-  }
-
-  label {
+  .signup-bottom-text {
     font-size: 12px;
-    color: #0c0d0e;
+    color: #6a737c;
   }
 
   .content-right-bottom-text {
