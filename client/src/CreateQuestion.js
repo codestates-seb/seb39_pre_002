@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Accordion from "./Accordion";
 
 
 
@@ -29,9 +30,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
                         onChange={(e) => setTitle(e.target.value)}
                         />
                     <label><strong>Body</strong></label>
-                    <CKEditor                                                                   
+                    <CKEditor                                                                 
                         editor={ ClassicEditor }
-                        data="<p>Hello from CKEditor 5!</p>"
+                        data=""
                         onReady={ editor => {
                             // You can store the "editor" and use when it is needed.
                             console.log( 'Editor is ready to use!', editor );
@@ -46,20 +47,13 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
                         onFocus={ ( event, editor ) => {
                             console.log( 'Focus.', editor );
                         } }
+                        
                         />
                 </form>
                 </section>
                 <PostButton>Post Your Question</PostButton>
             </Div>
-            <PostIt>
-            <article className="postItTitle">The Overflow Blog</article>
-            <article className="postItContent">
-            <ul>
-                <li>Stack Overflow is launching a Student Ambassador program. Here’s how to apply.</li>
-                <li>What companies lose when they track worker productivity (Ep. 478)</li>                
-            </ul>
-            </article>
-            </PostIt>
+            <Accordion />
         </Container>
         
     )
@@ -131,35 +125,7 @@ const Div = styled.div`
         width: 150px;
     `;
     
-    const PostIt = styled.div`
-
-    box-shadow: 0.1rem 0.1rem 1rem #D1D2D3;
-    height: 380px;
-    width: 300px;
-    min-width: 300px;
-    margin: 128px 30px 30px 30px;
-    display: flex;
-    flex-direction: column;
-
-    .postItTitle {
-
-      border: 1px solid rgb(234, 234, 234);
-      padding: 10px 10px 10px 25px;
-      background-color: rgb(244, 244, 244);
-      margin-bottom: 0px;
-    }
-
-    .postItContent {
-
-      line-height: 180%;
-      font-size: 0.8rem;
-      border: 1px solid rgb(234, 234, 234);
-      height: 150px;
-      background-color: white;
-      margin-top: 0px;
-      padding-right: 15px;
-    }
-  `;
+    
 
  
 export default CreateQuestion;
