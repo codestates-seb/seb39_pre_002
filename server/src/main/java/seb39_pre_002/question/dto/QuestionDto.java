@@ -28,9 +28,6 @@ public class QuestionDto {
 
         private String hashtag;
 
-//        private Question.QuestionStatus questionStatus;
-
-
         public void setQuestionId(long questionId) {
             this.questionId = questionId;
         }
@@ -43,11 +40,7 @@ public class QuestionDto {
         private String title;
         private String content;
         private String hashtag;
-//        private Question.QuestionStatus questionStatus;
-//
-//        public String getQuestionStatus() {
-//            return questionStatus.getStatus();
-//        }
-//    }
+
+
     }
 }

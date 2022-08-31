@@ -39,12 +39,11 @@ public class QuestionService {
 //        // 추가된 부분
 //        publisher.publishEvent(new QuestionRegistrationApplicationEvent(this, savedQuestion));
         return savedQuestion;
-
     }
 
 //    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Question updateQuestion(Question question) {
-//        Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+        Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
         Optional.ofNullable(question.getTitle())
                 .ifPresent(title -> question.setTitle(title));

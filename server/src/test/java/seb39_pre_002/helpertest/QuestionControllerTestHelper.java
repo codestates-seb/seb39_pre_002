@@ -40,9 +40,9 @@ public interface QuestionControllerTestHelper extends ControllerTestHelper {
             return List.of(
                     fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 식별자").ignored(),
                     fieldWithPath("title").type(JsonFieldType.STRING).description("제목").optional(),
-                    fieldWithPath("hashtag").type(JsonFieldType.STRING).description("해시태그").optional(),
-                    fieldWithPath("questionStatus").type(JsonFieldType.STRING)
-                            .description("질문 상태: Question_Create(작성) / Question_modify(수정), / Question_Delete(삭제) / Question_completion(완료)").optional()
+                    fieldWithPath("hashtag").type(JsonFieldType.STRING).description("해시태그").optional()
+//                    fieldWithPath("questionStatus").type(JsonFieldType.STRING)
+//                            .description("질문 상태: Question_Create(작성) / Question_modify(수정), / Question_Delete(삭제) / Question_completion(완료)").optional()
             );
         }
 

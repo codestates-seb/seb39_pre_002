@@ -146,7 +146,7 @@ public class QuestionControllerDocumentationTest implements QuestionControllerTe
 //                .andExpect(jsonPath("$.data.questionId").value(patch.getQuestionId()))
 //                .andExpect(jsonPath("$.data.title").value(patch.getTitle()))
 //                .andExpect(jsonPath("$.data.content").value(patch.getContent()))
-//                .andExpect(jsonPath("$.data.questionStatus").value(patch.getQuestionStatus().getStatus()))
+////                .andExpect(jsonPath("$.data.questionStatus").value(patch.getQuestionStatus().getStatus()))
 //                .andDo(document("patch-question",
 //                        getRequestPreProcessor(),
 //                        getResponsePreProcessor(),
@@ -163,64 +163,64 @@ public class QuestionControllerDocumentationTest implements QuestionControllerTe
 //                ));
 //    }
 
-//    @Test
-//    public void patchQuestionTest() throws Exception {
-//        // given
-//        long questionId = 1L;
-//        QuestionDto.Patch patch = new QuestionDto.Patch(1,"test1Title", "test1Content", "hashtag바디"); //일부만 작성 왜 안되는지 확인 필요
-//
-//        String content = gson.toJson(patch);
-//
-//        QuestionDto.Response responseBody = new QuestionDto.Response(1L,
-//                "test1Title", "test1Content", "hashtag바디");
-//
-//        // willReturn()이 최소한 null은 아니어야 한다.
-//        given(questionMapper.questionPatchToQuestion(Mockito.any(QuestionDto.Patch.class))).willReturn(new Question());
-//
-//        given(questionService.createQuestion(Mockito.any(Question.class))).willReturn(new Question());
-//
-//        given(questionMapper.questionToQuestionResponse(Mockito.any(Question.class))).willReturn(responseBody);
-//
-//        // when
-//        ResultActions actions = mockMvc.perform(
-//                RestDocumentationRequestBuilders
-//                        .patch("/v1/questions/{question-id}", questionId)
-//                        .accept(MediaType.APPLICATION_JSON)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(content));
-//
-//        // then
-//        actions
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.data.questionId").value(patch.getQuestionId()))
-//                .andExpect(jsonPath("$.data.title").value(patch.getTitle()))
-//                .andExpect(jsonPath("$.data.content").value(patch.getContent()))
-//                .andExpect(jsonPath("$.data.hashtag").value(patch.getHashtag()))
-//                .andDo(document("patch-question",
-//                        preprocessRequest(prettyPrint()),
-//                        preprocessResponse(prettyPrint()),
-//                        pathParameters(
-//                                Arrays.asList(parameterWithName("question-id").description("질문 식별자 ID"))
-//                        ),
-//                        requestFields(
-//                                List.of(
-//                                        fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 식별자").optional(),
-//                                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목").optional(),
-//                                        fieldWithPath("content").type(JsonFieldType.STRING).description("내용").optional(),
-//                                        fieldWithPath("hashtag").type(JsonFieldType.STRING).description("해시태그").optional()
-//                                )
-//                        ),
-//                        responseFields(
-//                                Arrays.asList(
-//                                        fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터").optional(),
-//                                        fieldWithPath("data.questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
-//                                        fieldWithPath("data.title").type(JsonFieldType.STRING).description("제목"),
-//                                        fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
-//                                        fieldWithPath("data.hashtag").type(JsonFieldType.STRING).description("해시태그")
-//                                )
-//                        )
-//                ));
-//    }
+    @Test
+    public void patchQuestionTest() throws Exception {
+        // given
+        long questionId = 1L;
+        QuestionDto.Patch patch = new QuestionDto.Patch(1,"test1Title", "test1Content", "hashtag바디"); //일부만 작성 왜 안되는지 확인 필요
+
+        String content = gson.toJson(patch);
+
+        QuestionDto.Response responseBody = new QuestionDto.Response(1L,
+                "test1Title", "test1Content", "hashtag바디");
+
+        // willReturn()이 최소한 null은 아니어야 한다.
+        given(questionMapper.questionPatchToQuestion(Mockito.any(QuestionDto.Patch.class))).willReturn(new Question());
+
+        given(questionService.updateQuestion(Mockito.any(Question.class))).willReturn(new Question());
+
+        given(questionMapper.questionToQuestionResponse(Mockito.any(Question.class))).willReturn(responseBody);
+
+        // when
+        ResultActions actions = mockMvc.perform(
+                RestDocumentationRequestBuilders
+                        .patch("/v1/questions/{question-id}", questionId)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content));
+
+        // then
+        actions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.questionId").value(patch.getQuestionId()))
+                .andExpect(jsonPath("$.data.title").value(patch.getTitle()))
+                .andExpect(jsonPath("$.data.content").value(patch.getContent()))
+                .andExpect(jsonPath("$.data.hashtag").value(patch.getHashtag()))
+                .andDo(document("patch-question",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        pathParameters(
+                                Arrays.asList(parameterWithName("question-id").description("질문 식별자 ID"))
+                        ),
+                        requestFields(
+                                List.of(
+                                        fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 식별자").optional(),
+                                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목").optional(),
+                                        fieldWithPath("content").type(JsonFieldType.STRING).description("내용").optional(),
+                                        fieldWithPath("hashtag").type(JsonFieldType.STRING).description("해시태그").optional()
+                                )
+                        ),
+                        responseFields(
+                                Arrays.asList(
+                                        fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터").optional(),
+                                        fieldWithPath("data.questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
+                                        fieldWithPath("data.title").type(JsonFieldType.STRING).description("제목"),
+                                        fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
+                                        fieldWithPath("data.hashtag").type(JsonFieldType.STRING).description("해시태그")
+                                )
+                        )
+                ));
+    }
 
     @Test
     public void getQuestionTest() throws Exception {
