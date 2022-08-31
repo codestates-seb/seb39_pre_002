@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import botcheck from "./img/botcheck.png";
+
 function Signup() {
   return (
     <Main>
@@ -153,11 +155,17 @@ function Signup() {
                     at least 1 letter and 1 number.
                   </p>
                 </div>
-                <div>봇 체크</div>
+                <div className="bot-box">
+                  <img
+                    className="botcheck"
+                    src={botcheck}
+                    alt="botcheckImage"
+                  ></img>
+                </div>
                 <div>
-                  <div className="flex">
+                  <div className="underbot">
                     <div>
-                      <input type="checkbox" />
+                      <input className="checkbox" type="checkbox" />
                     </div>
                     <div>
                       <label>
@@ -166,7 +174,18 @@ function Signup() {
                         digests.
                       </label>
                     </div>
-                    <div>§</div>
+                    <div>
+                      <svg
+                        aria-hidden="true"
+                        class="svg-icon iconHelpSm"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="#6a737b"
+                      >
+                        <path d="M7 1C3.74 1 1 3.77 1 7c0 3.26 2.77 6 6 6 3.27 0 6-2.73 6-6s-2.73-6-6-6Zm1.06 9.06c-.02.63-.48 1.02-1.1 1-.57-.02-1.03-.43-1.01-1.06.02-.63.5-1.04 1.08-1.02.6.02 1.05.45 1.03 1.08Zm.73-3.07-.47.3c-.2.15-.36.36-.44.6a3.6 3.6 0 0 0-.08.65c0 .04-.03.14-.16.14h-1.4c-.14 0-.16-.09-.16-.13-.01-.5.11-.99.36-1.42A4.6 4.6 0 0 1 7.7 6.07c.15-.1.21-.21.3-.33.18-.2.28-.47.28-.74.01-.67-.53-1.14-1.18-1.14-.9 0-1.18.7-1.18 1.46H4.2c0-1.17.31-1.92.98-2.36a3.5 3.5 0 0 1 1.83-.44c.88 0 1.58.16 2.2.62.58.42.88 1.02.88 1.82 0 .5-.17.9-.43 1.24-.15.2-.44.47-.86.79h-.01Z"></path>
+                      </svg>
+                    </div>
                   </div>
                 </div>
                 <div>
@@ -178,10 +197,23 @@ function Signup() {
                 <a>privacy policy</a> and <a>cookie policy</a>
               </div>
             </div>
-            <div>
+            <div className="content-right-bottom-text">
               Already have an account? <a>Log in</a>
               <div>
-                Are you an employer? <a>Sign up on Talent §</a>
+                Are you an employer?{" "}
+                <a>
+                  Sign up on Talent{" "}
+                  <svg
+                    aria-hidden="true"
+                    class="va-text-bottom sm:d-none svg-icon iconShareSm"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="#1095fa"
+                  >
+                    <path d="M5 1H3a2 2 0 0 0-2 2v8c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V9h-2v2H3V3h2V1Zm2 0h6v6h-2V4.5L6.5 9 5 7.5 9.5 3H7V1Z"></path>
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
@@ -209,13 +241,13 @@ export const Main = styled.div`
   }
   .content-left {
     font-size: 15px;
-    line-height: 19.6154px;
+    line-height: 19px;
     text-decoration: none solid rgb(35, 38, 41);
     color: #232629;
     height: 312px;
-    width: 421.328px;
+    width: 421px;
     margin: 0 48px 128px 0;
-    max-width: 421.333px;
+    max-width: 421px;
     svg {
       margin-right: 8px;
       fill: #1095fa;
@@ -223,11 +255,11 @@ export const Main = styled.div`
   }
   .content-left-texts {
     font-size: 15px;
-    line-height: 19.6154px;
+    line-height: 19px;
     text-decoration: none solid rgb(35, 38, 41);
     color: #232629;
     height: 24px;
-    width: 421.328px;
+    width: 421px;
     margin: 0 0 24px 0;
     display: flex;
   }
@@ -263,7 +295,7 @@ export const Main = styled.div`
     text-decoration: none solid rgb(35, 38, 41);
     background-color: white;
     color: #232629;
-    height: 37.7812px;
+    height: 37px;
     width: 316px;
     border: 1px solid #d6d9dc;
     margin: 0px 0 4px 0;
@@ -282,8 +314,8 @@ export const Main = styled.div`
     background-color: #2f3337;
     background-position: 0% 0%;
     color: #ffffff;
-    height: 37.7699px;
-    width: 315.994px;
+    height: 37px;
+    width: 315px;
     border: 1px solid #d6d9dc;
     margin: 4px 0 4px 0;
     padding: 10px 10px 10px 10px;
@@ -298,8 +330,8 @@ export const Main = styled.div`
     text-align: center;
     background-color: #385496;
     color: #ffffff;
-    height: 37.7699px;
-    width: 315.994px;
+    height: 37px;
+    width: 315px;
     border: 1px solid #ffffff;
     margin: 4px 0 4px 0;
     padding: 10px 10px 10px 10px;
@@ -325,11 +357,11 @@ export const Main = styled.div`
   .input-text {
     font-size: 15px;
     font-weight: 600;
-    line-height: 19.6154px;
+    line-height: 19px;
     text-decoration: none solid rgb(12, 13, 14);
     text-align: left;
     word-spacing: 0px;
-    height: 19.6094px;
+    height: 19px;
     width: 268px;
     margin: 2px 0 2px 0;
     padding: 0 2px 0 2px;
@@ -337,11 +369,11 @@ export const Main = styled.div`
 
   .password-text {
     font-size: 12px;
-    line-height: 15.6923px;
+    line-height: 15px;
     text-decoration: none solid rgb(106, 115, 124);
     text-align: left;
     color: #6a737c;
-    height: 31.375px;
+    height: 31px;
     width: 268px;
     margin: 4px 0 4px 0;
     clear: both;
@@ -358,11 +390,59 @@ export const Main = styled.div`
     cursor: text;
   }
 
+  .bot-box {
+    background-color: #f1f2f3;
+    height: 156px;
+    width: 268px;
+    border: 1px solid #e3e6e8;
+    margin: 20px 0 6px 0;
+    padding: 8px 0 2px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .underbot {
+    display: flex;
+    justify-content: center;
+  }
+  .checkbox {
+    height: 13px;
+    width: 13px;
+    margin-right: 5px;
+  }
+
   .button-sign {
     width: 268px;
     height: 38px;
     padding: 10.4px;
     margin: 2px;
+  }
+
+  .botcheck {
+    height: 144px;
+    width: 164px;
+  }
+
+  label {
+    font-size: 12px;
+    color: #0c0d0e;
+  }
+
+  .content-right-bottom-text {
+    font-size: 13px;
+    line-height: 13px;
+    text-decoration: none solid rgb(35, 38, 41);
+    text-align: center;
+    color: #232629;
+    height: 78px;
+    width: 316px;
+    margin: 0 0 24px 0;
+    padding: 16px 16px 16px 16px;
+    max-width: 316px;
+    div {
+      margin-top: 15px;
+    }
   }
 `;
 

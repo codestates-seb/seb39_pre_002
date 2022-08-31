@@ -22,19 +22,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AppMain>
-        <Header />
-        <div>
-          <Routes>
-            <Route path="/" element={<Body data={data} />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/create" element={<CreateQuestion />} />
-            <Route path="/modify" element={<ModifyQuestion />} />
-            <Route path="/question/:id" element={<QuestionDetail />} />
-          </Routes>
-        </div>
-      </AppMain>
+      <Header />
+      <div>
+        <Routes>
+          <Route path="/" element={<Body data={data} />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/create" element={<CreateQuestion />} />
+          <Route path="/modify" element={<ModifyQuestion />} />
+          <Route path="/question/:id" element={<QuestionDetail />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
