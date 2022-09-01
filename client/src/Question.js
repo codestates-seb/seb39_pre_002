@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 export default function Question({ data, key, handleClick }) {
   return (
     <Body key={key}>
-      <div>
-        <div title="Score of 0">
+      <div class="left-box">
+        <div className="left-text" title="Score of 0">
           <span>0</span>
           <span>votes</span>
         </div>
-        <div title="0 answers">
+        <div className="left-text" title="0 answers">
           <span>0</span>
           <span>answers</span>
         </div>
-        <div class="s-post-summary--stats-item " title="42 views">
+        <div className="left-text" title="42 views">
           <span>42</span>
           <span>views</span>
         </div>
@@ -83,6 +83,17 @@ export const Body = styled.div`
   padding: 16px 16px 16px 16px;
   display: flex;
 
+  .left-box {
+    margin: 0 10px 0 20px;
+  }
+  .left-text {
+    display: flex;
+    justify-content: flex-end;
+    span {
+      margin: 1px 1px 1px 2px;
+    }
+  }
+
   .tags {
     background-color: #d0e3f1;
     color: #2c5877;
@@ -93,7 +104,7 @@ export const Body = styled.div`
     padding: 5px 6px 5px 5px;
   }
   .body-bottom {
-    width: 700px;
+    width: 655px;
     display: flex;
   }
   .body-bottom-right {
