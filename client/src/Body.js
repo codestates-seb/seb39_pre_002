@@ -56,7 +56,11 @@ function Body({ data }) {
         {data !== null ? (
           <div className="body-main">
             {data.map((data) => (
-              <Question data={data} key={data.id} handleClick={handleClick} />
+              <Question
+                data={data}
+                key={data.questionId}
+                handleClick={handleClick}
+              />
             ))}
           </div>
         ) : null}

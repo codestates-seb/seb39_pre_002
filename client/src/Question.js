@@ -21,33 +21,33 @@ export default function Question({ data, key, handleClick }) {
       </div>
       <div>
         <h3>
-          <Link to={`/question/${data.id}`}>{data.title}</Link>
+          <Link to={`/questions/${data.questionId}`}>{data.questionTitle}</Link>
         </h3>
         <div className="body-bottom">
-          <div>
+          {/* <div>
             {data.hashtag.map((data) => (
               <a className="tags">{data}</a>
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="body-bottom-right">
           <a href="">
             <div>
-              {/* <img
-                  src="https://lh3.googleusercontent.com/a-/AOh14GhiOudBctF5JQSI9zwXa_r6A_uO3QDM1S3tDxxWoA=k-s32"
-                  alt="user avatar"
-                  width="16"
-                  height="16"
-                  class="s-avatar--image"
-                /> */}
+              <img
+                src="https://lh3.googleusercontent.com/a-/AOh14GhiOudBctF5JQSI9zwXa_r6A_uO3QDM1S3tDxxWoA=k-s32"
+                alt="user avatar"
+                width="16"
+                height="16"
+                class="s-avatar--image"
+              />
             </div>
           </a>
 
           <div>
             <div>
               <a href="" className="name">
-                {data.memberName}
+                {/* {data.memberName} */}
               </a>
             </div>
 
@@ -60,7 +60,7 @@ export default function Question({ data, key, handleClick }) {
 
           <time>
             <a className="time" href="">
-              {data.questionStatus}
+              {/* {data.questionStatus} */}
               <span title="postedTime">xx sec ago</span>
             </a>
           </time>
