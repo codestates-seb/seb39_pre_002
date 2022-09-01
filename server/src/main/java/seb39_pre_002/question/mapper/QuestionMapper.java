@@ -1,24 +1,25 @@
-package seb39_pre_002.questions.mapper;
+package seb39_pre_002.question.mapper;
 
 import org.mapstruct.Mapper;
-import seb39_pre_002.questions.dto.QuestionsPatchDto;
-import seb39_pre_002.questions.dto.QuestionsPostDto;
-import seb39_pre_002.questions.dto.QuestionsResponseDto;
-import seb39_pre_002.questions.entity.Questions;
+import seb39_pre_002.question.dto.QuestionDto;
+import seb39_pre_002.question.dto.QuestionPatchDto;
+import seb39_pre_002.question.dto.QuestionPostDto;
+import seb39_pre_002.question.dto.QuestionResponseDto;
+import seb39_pre_002.question.entity.Question;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface QuestionsMapper {
+public interface QuestionMapper {
 
     //질문 등록
-    Questions questionsPostDtoToQuestions(QuestionsPostDto questionsPostDto);
+    Question questionPostDtoToQuestion(QuestionPostDto requestBody);
 
     //질문 조회
-    List<QuestionsResponseDto> questionsToQuestionsResponseDto(List<Questions> questions);
+    List<QuestionDto.Response> questionToQuestionResponseDto(List<Question> question);
 
     //질문 수정
-    Questions questionsPatchToQuestions(QuestionsPatchDto questionsPatchDto);
+    Question questionPatchToQuestion(QuestionDto.Patch requestBody);
 
-    QuestionsResponseDto questionsToQuestionsResponse(Questions questions);
+    QuestionResponseDto questionToQuestionResponse(Question question);
 }

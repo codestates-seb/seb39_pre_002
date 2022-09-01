@@ -1,26 +1,28 @@
-package seb39_pre_002.questions.dto;
+package seb39_pre_002.question.dto;
 
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Getter
-public class QuestionsPatchDto {
+public class QuestionPatchDto {
 
-    private Long questionsId;
+    private long questionId;
 
     private String questionTitle;   // 질문 제목
 
     private String questionContent; // 질문 등록
 
+    private String memberId;
 
 
 
-    public void setQuestionsId(long questionsId) {
-       this.questionsId = questionsId;
+
+
+    public void setQuestionId(long questionsId) {
+       this.questionId = questionsId;
    }
 
 }

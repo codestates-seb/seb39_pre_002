@@ -1,7 +1,8 @@
-package seb39_pre_002.questions.repositiry;
+package seb39_pre_002.question.repositiry;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import seb39_pre_002.questions.entity.Questions;
+import seb39_pre_002.question.entity.Question;
 
-public interface QuestionsRepository extends JpaRepository<Questions, Long> {
+public interface QuestionRepository extends JpaRepository<Question, Long> {
+
 }

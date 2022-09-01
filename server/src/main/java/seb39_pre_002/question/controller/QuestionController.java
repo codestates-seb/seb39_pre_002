@@ -1,14 +1,16 @@
-package seb39_pre_002.questions.controller;
+package seb39_pre_002.question.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import seb39_pre_002.questions.dto.QuestionsPatchDto;
-import seb39_pre_002.questions.dto.QuestionsPostDto;
-import seb39_pre_002.dto.SingleResponseDto;
-import seb39_pre_002.questions.entity.Questions;
-import seb39_pre_002.questions.mapper.QuestionsMapper;
-import seb39_pre_002.questions.service.QuestionsService;
+import seb39_pre_002.question.dto.QuestionDto;
+import seb39_pre_002.question.dto.QuestionPostDto;
+import seb39_pre_002.response.MultiResponseDto;
+import seb39_pre_002.response.SingleResponseDto;
+import seb39_pre_002.question.entity.Question;
+import seb39_pre_002.question.mapper.QuestionMapper;
+import seb39_pre_002.question.service.QuestionService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -16,47 +18,61 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/questions")
-public class QuestionsController {
+public class QuestionController {
 
-    private final QuestionsService questionsService;
+    private final QuestionService questionService;
 
-    private final QuestionsMapper mapper;
+    private final QuestionMapper mapper;
 
-    public QuestionsController(QuestionsService questionsService, QuestionsMapper mapper) {
-        this.questionsService = questionsService;
+    public QuestionController(QuestionService questionService, QuestionMapper mapper) {
+        this.questionService = questionService;
         this.mapper = mapper;
     }
 
     @PostMapping
-    public ResponseEntity postQuestions(@Valid @RequestBody QuestionsPostDto questionsPostDto) {
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionPostDto) {
 
-        Questions questions = questionsService.createQuestions(mapper.questionsPostDtoToQuestions(questionsPostDto));
+        Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto));
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionsToQuestionsResponse(questions)),
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionToQuestionResponse(question)),
                 HttpStatus.CREATED);
 
     }
+
+    //전체 조회
     @GetMapping
-    public ResponseEntity getQuestions() {
-        List<Questions> questions = questionsService.findQuestions();
+    public ResponseEntity getQuestions(@Positive @RequestParam int page,
+                                       @Positive @RequestParam int size) {
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionsToQuestionsResponseDto(questions)),HttpStatus.OK);
+        Page<Question> pageQuestions = questionService.findQuestions(page -1 , size);
+        List<Question> questions = pageQuestions.getContent();
+
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.questionToQuestionResponseDto(questions),pageQuestions),HttpStatus.OK);
+    }
+    //게시글 하나 조회
+    @GetMapping("/{question-id}")
+    public ResponseEntity getQuestion(
+            @PathVariable("question-id") @Positive long questionId) {
+        Question question = questionService.findQuestion(questionId);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionToQuestionResponse(question)),HttpStatus.OK);
+
     }
 
-    @PatchMapping("/{questions-id}")
-    public ResponseEntity patchQuestions(@PathVariable("questions-id")@Positive long questionsId,
-                                         @Valid @RequestBody QuestionsPatchDto questionsPatchDto) {
-        questionsPatchDto.setQuestionsId(questionsId);
+    @PatchMapping("/{question-id}")
+    public ResponseEntity patchQuestion(@PathVariable("question-id")@Positive long questionId,
+                                         @Valid @RequestBody QuestionDto.Patch requestBody) {
+        requestBody.setQuestionId(questionId);
 
-        Questions questions =
-                questionsService.updateQuestions(mapper.questionsPatchToQuestions(questionsPatchDto));
+        Question question =
+                questionService.updateQuestion(mapper.questionPatchToQuestion(requestBody));
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionsToQuestionsResponse(questions)),HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.questionToQuestionResponse(question)),HttpStatus.OK);
 
     }
-    @DeleteMapping("/{questions-id}")
-    public ResponseEntity deleteQuestions(@PathVariable("questions-id")@Positive long questionsId) {
-        questionsService.deleteQuestions(questionsId);
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id")@Positive long questionId) {
+        questionService.deleteQuestion(questionId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

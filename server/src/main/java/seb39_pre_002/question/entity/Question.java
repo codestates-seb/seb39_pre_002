@@ -1,7 +1,9 @@
-package seb39_pre_002.questions.entity;
+package seb39_pre_002.question.entity;
 
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,22 +19,29 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Entity(name = "QUESTIONS")
-public class Questions {
+@Entity(name = "QUESTION")
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long questionsId;      //질문 아이디
+    private long questionId;      //질문 아이디
 
     @Column(nullable = false)
     private String questionTitle;   // 질문 제목
 
     private String questionContent;   // 질문 내용
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt =LocalDateTime.now();
+    private String memberId; // 회원 아이디
 
-    @Column(nullable = false, name = "LAST_MODIFIED_AT")
-    private LocalDateTime modifiedAt =LocalDateTime.now();
+    @CreatedDate
+    private LocalDateTime createdAt;
 
+    @LastModifiedDate
+    private LocalDateTime modifiedAt;
+
+
+    public Question(String questionTitle, String questionContent, String memberId) {
+        this.questionTitle = questionTitle;
+        this.questionContent = questionContent;
+        this.memberId = memberId;
+    }
 }
