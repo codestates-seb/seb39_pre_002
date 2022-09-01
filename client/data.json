@@ -5,13 +5,9 @@
       "questionId": 1,
       "title": "test1 제목, 태그, 질문상태? 세가지의 변화가 주 타겟",
       "content": "내용-------------------- 내용-------------------- 내용-------------------- 내용--------------------",
-      "hashtag": [
-        "Node.js",
-        "azure",
-        "powershell"
-      ],
+      "hashtag": ["Node.js", "azure", "powershell"],
       "createdAt": "new Date",
-      "memberName": null,
+      "memberName": "ryu",
       "questionStatus": "modified"
     },
     {
@@ -19,26 +15,19 @@
       "questionId": 1,
       "title": "test2 제목이 변경되었습니다. 뒷부분은 길이 어느정도 길게 하는 중",
       "content": "내용-------------------- 내용-------------------- 내용-------------------- 내용--------------------",
-      "hashtag": [
-        "Node.js",
-        "azure",
-        "powershell"
-      ],
+      "hashtag": ["Node.js", "azure", "powershell"],
       "createdAt": "new Date",
-      "memberName": null,
-      "questionStatus": "modified"
+      "memberName": "lee",
+      "questionStatus": "answered"
     },
     {
       "id": 3,
       "questionId": 1,
       "title": "test3 태그가 변경되었습니다. 뒷부분은 길이 어느정도 길게 하는 중",
       "content": "내용-------------------- 내용-------------------- 내용-------------------- 내용--------------------",
-      "hashtag": [
-        "JavaScript",
-        "React"
-      ],
+      "hashtag": ["JavaScript", "React"],
       "createdAt": "new Date",
-      "memberName": null,
+      "memberName": "kim",
       "questionStatus": "modified"
     },
     {
@@ -46,12 +35,9 @@
       "questionId": 1,
       "title": "test4 질문상태 변경되었습니다. 뒷부분은 길이 어느정도 길게 하는 중",
       "content": "내용-------------------- 내용-------------------- 내용-------------------- 내용--------------------",
-      "hashtag": [
-        "JavaScript",
-        "React"
-      ],
+      "hashtag": ["JavaScript", "React"],
       "createdAt": "new Date",
-      "memberName": null,
+      "memberName": "gold",
       "questionStatus": "asked"
     }
   ]
