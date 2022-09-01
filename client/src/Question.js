@@ -4,68 +4,66 @@ import { Link } from "react-router-dom";
 
 export default function Question({ data, key, handleClick }) {
   return (
-    <Body
-      id="question-summary-73515715"
-      data-post-id="73515715"
-      data-post-type-id="1"
-    >
-      <div>
-        <div title="Score of 0">
+    <Body key={key}>
+      <div class="left-box">
+        <div className="left-text" title="Score of 0">
           <span>0</span>
           <span>votes</span>
         </div>
-        <div title="0 answers">
+        <div className="left-text" title="0 answers">
           <span>0</span>
           <span>answers</span>
         </div>
-        <div class="s-post-summary--stats-item " title="42 views">
+        <div className="left-text" title="42 views">
           <span>42</span>
           <span>views</span>
         </div>
       </div>
       <div>
         <h3>
-          <Link to={`/question/${data.id}`}>{data.title}</Link>
+          <Link to={`/questions/${data.questionId}`}>{data.questionTitle}</Link>
         </h3>
         <div className="body-bottom">
-          <div>
+          {/* <div>
             {data.hashtag.map((data) => (
               <a className="tags">{data}</a>
             ))}
-          </div>
+          </div> */}
+        </div>
 
-          <div className="body-bottom-right">
-            <a href="">
-              <div>
-                <img
-                  src="https://lh3.googleusercontent.com/a-/AOh14GhiOudBctF5JQSI9zwXa_r6A_uO3QDM1S3tDxxWoA=k-s32"
-                  alt="user avatar"
-                  width="16"
-                  height="16"
-                  class="s-avatar--image"
-                />
-              </div>
-            </a>
-
+        <div className="body-bottom-right">
+          <a href="">
             <div>
-              <div>
-                <a href="">{data.memberName}</a>
-              </div>
+              <img
+                src="https://lh3.googleusercontent.com/a-/AOh14GhiOudBctF5JQSI9zwXa_r6A_uO3QDM1S3tDxxWoA=k-s32"
+                alt="user avatar"
+                width="16"
+                height="16"
+                class="s-avatar--image"
+              />
+            </div>
+          </a>
 
-              <ul>
-                <li>
-                  <span title="reputation score ">author reputation score</span>
-                </li>
-              </ul>
+          <div>
+            <div>
+              <a href="" className="name">
+                {/* {data.memberName} */}
+              </a>
             </div>
 
-            <time>
-              <a href="">
-                modified / answered / asked
-                <span title="postedTime">xx sec ago</span>
-              </a>
-            </time>
+            <ul>
+              <li>
+                {/* <span title="reputation score ">author reputation score</span> */}
+              </li>
+            </ul>
           </div>
+
+          <time>
+            <a className="time" href="">
+              {/* {data.questionStatus} */}
+              <span title="postedTime">xx sec ago</span>
+            </a>
+          </time>
         </div>
       </div>
     </Body>
@@ -76,32 +74,54 @@ export const Body = styled.div`
   font-size: 13px;
   line-height: 17px;
   text-decoration: none solid rgb(35, 38, 41);
-  background-color: #fdf7e2;
+  /* background-color: #fdf7e2; */
   background-position: 0% 0%;
   color: #232629;
-  height: 106.078px;
-  width: 751px;
+  width: 750px;
   border-bottom: 1px solid #e3e6e8;
+  border-top: 1px solid #e3e6e8;
   padding: 16px 16px 16px 16px;
   display: flex;
+
+  .left-box {
+    margin: 0 10px 0 20px;
+  }
+  .left-text {
+    display: flex;
+    justify-content: flex-end;
+    span {
+      margin: 1px 1px 1px 2px;
+    }
+  }
 
   .tags {
     background-color: #d0e3f1;
     color: #2c5877;
-    height: 23.5938px;
-    /* width: 68.7031px; */
+    height: 23px;
+    /* width: 68px; */
     border: 1px solid #ffffff;
     margin: 0 4px 4px 0;
     padding: 5px 6px 5px 5px;
   }
   .body-bottom {
-    width: 700px;
+    width: 655px;
     display: flex;
   }
   .body-bottom-right {
     /* padding-left: 40px; */
     justify-content: flex-end;
     display: flex;
+
+    .name {
+      color: #0074cc;
+      margin-right: 2px;
+    }
+    .time {
+      color: #525960;
+      span {
+        margin-left: 4px;
+      }
+    }
   }
   ul {
     padding-left: 0px;
@@ -118,8 +138,8 @@ export const Body = styled.div`
   }
 
   h3 {
-    margin: 0 0 10px 0;
-    font-weight: 500;
+    margin: 0 20px 10px 0;
+    font-weight: 450;
   }
 `;
 
