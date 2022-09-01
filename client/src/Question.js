@@ -7,7 +7,7 @@ export default function Question({ data, key, handleClick }) {
     <Body key={key}>
       <div class="left-box">
         <div className="left-text" title="Score of 0">
-          <span>0</span>
+          <span>10</span>
           <span>votes</span>
         </div>
         <div className="left-text" title="0 answers">
