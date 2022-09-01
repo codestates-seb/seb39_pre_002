@@ -23,22 +23,32 @@ function Body({ data }) {
           <div>
             <div className="tab-filter">
               <div className="body-middle-tab">
-                <a>
+                <a className="tabs">
                   <div>Newest</div>
                 </a>
-                <a>
+                <a className="tabs">
                   <div>Active</div>
                 </a>
-                <a>
+                <a className="tabs">
                   <div>Bountied 317</div>
                 </a>
-                <a>
+                <a className="tabs">
                   <div>Unanswered</div>
                 </a>
-                <button>more ▼</button>
+                <button className="tabs">more ▼</button>
               </div>
-              <div>
-                <button>filter</button>
+              <div className="filter-box">
+                <button className="filter">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    fill="#39739d"
+                  >
+                    <path d="M2 4h14v2H2V4Zm2 4h10v2H4V8Zm8 4H6v2h6v-2Z"></path>
+                  </svg>
+                  <span>filter</span>
+                </button>
               </div>
             </div>
           </div>
@@ -101,6 +111,30 @@ export const Main = styled.div`
     .body-middle-tab {
       display: flex;
       margin: 5px;
+    }
+    .tabs {
+      font-size: 12px;
+      color: #525960;
+      border: 1px solid #9fa6ad;
+      margin: 0 -1px -1px 0;
+      padding: 10px 10px 10px 10px;
+    }
+    .filter-box {
+      display: flex;
+      align-items: center;
+    }
+    .filter {
+      background-color: #e1ecf4;
+      color: #2c5877;
+      border: 1px solid #7aa7c7;
+      border-radius: 3px;
+      height: 39px;
+      width: 69px;
+      margin-left: 10px;
+      padding: 10px 10px 10px 10px;
+      span {
+        vertical-align: 3px;
+      }
     }
   }
   .askQuestion {
