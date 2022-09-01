@@ -8,5 +8,6 @@ import java.util.Optional;
 //데이터베이스 연동
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    Optional<Member> findByEmail(String email);
+    Optional<Member> findByMemberEmail(String MemberEmail);
+
 }

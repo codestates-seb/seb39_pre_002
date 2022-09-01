@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import seb39_pre_002.member.repository.MemberRepository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -68,8 +69,8 @@ public class MemberService {
         return findMember;
     }
 
-    private void verifyExistsEmail(String email) {
-        Optional<Member> member = memberRepository.findByEmail(email);
+    private void verifyExistsEmail(String MemberEmail) {
+        Optional<Member> member = memberRepository.findByMemberEmail(MemberEmail);
         if (member.isPresent())
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
     }

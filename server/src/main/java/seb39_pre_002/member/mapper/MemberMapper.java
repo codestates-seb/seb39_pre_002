@@ -3,9 +3,7 @@ package seb39_pre_002.member.mapper;
 
 import org.mapstruct.Mapper;
 import seb39_pre_002.member.dto.MemberDto;
-import seb39_pre_002.member.dto.MemberPatchDto;
 
-import seb39_pre_002.member.dto.MemberResponseDto;
 import seb39_pre_002.member.entity.Member;
 
 import java.util.List;

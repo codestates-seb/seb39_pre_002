@@ -3,9 +3,12 @@ package seb39_pre_002.member.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import seb39_pre_002.question.entity.Question;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 //클래스 정리 필요 너무 중구난방으로 했음 단어?마다 첫글자 대문자로 하기
 //매핑 아직 안함
@@ -34,21 +37,30 @@ public class Member {
     @Column(length = 20, nullable = false) //회원 상태 저장
     private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
 
-    @Column(nullable = false)  //생성시간
-    private LocalDateTime createdAt = LocalDateTime.now();
+//    @Column(nullable = false)  //생성시간
+//    private LocalDateTime createdAt = LocalDateTime.now();
+//
+//    @Column(nullable = false, name = "LAST_MODIFIED_AT") //수정시간
+//    private LocalDateTime modifiedAt = LocalDateTime.now();
 
-    @Column(nullable = false, name = "LAST_MODIFIED_AT") //수정시간
-    private LocalDateTime modifiedAt = LocalDateTime.now();
-
+    @OneToMany(mappedBy = "member")
+    private List<Question> questions = new ArrayList<>();
 
     public Member(String memberEmail) {
         this.memberEmail = memberEmail;
     }
 
-    public Member(String mebmerEmail, String memberName, String memberPassword) {
-        this.memberEmail = mebmerEmail;
+    public Member(String memberEmail, String memberName, String memberPassword) {
+        this.memberEmail = memberEmail;
         this.memberName = memberName;
         this.memberPassword = memberPassword;
+    }
+
+    public void setQuestion(Question question){
+        questions.add(question);
+        if(question.getMember() != this){
+            question.setMember(this);
+        }
     }
 
 

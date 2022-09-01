@@ -14,11 +14,11 @@ public class MemberDto {
     @AllArgsConstructor // 테스트를 위해 추가
     public static class Post {
 
-        private String meberEmail;
+        private String memberEmail;
 
         private String memberName;
 
-        private String mebmerPassword;
+        private String memberPassword;
     }
 
 

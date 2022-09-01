@@ -205,18 +205,18 @@ public class QuestionControllerDocumentationTest implements QuestionControllerTe
                         requestFields(
                                 List.of(
                                         fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 식별자").optional(),
-                                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목").optional(),
-                                        fieldWithPath("content").type(JsonFieldType.STRING).description("내용").optional(),
-                                        fieldWithPath("hashtag").type(JsonFieldType.STRING).description("해시태그").optional()
+                                        fieldWithPath("questionTitle").type(JsonFieldType.STRING).description("제목").optional(),
+                                        fieldWithPath("questionContent").type(JsonFieldType.STRING).description("내용").optional(),
+                                        fieldWithPath("questionHashtag").type(JsonFieldType.STRING).description("해시태그").optional()
                                 )
                         ),
                         responseFields(
                                 Arrays.asList(
                                         fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터").optional(),
                                         fieldWithPath("data.questionId").type(JsonFieldType.NUMBER).description("질문 식별자"),
-                                        fieldWithPath("data.title").type(JsonFieldType.STRING).description("제목"),
-                                        fieldWithPath("data.content").type(JsonFieldType.STRING).description("내용"),
-                                        fieldWithPath("data.hashtag").type(JsonFieldType.STRING).description("해시태그")
+                                        fieldWithPath("data.questionTitle").type(JsonFieldType.STRING).description("제목"),
+                                        fieldWithPath("data.questionContent").type(JsonFieldType.STRING).description("내용"),
+                                        fieldWithPath("data.questionHashtag").type(JsonFieldType.STRING).description("해시태그")
                                 )
                         )
                 ));

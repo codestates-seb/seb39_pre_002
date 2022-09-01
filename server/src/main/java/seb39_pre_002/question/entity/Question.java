@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import seb39_pre_002.member.entity.Member;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,11 +20,11 @@ public class Question {
     private long questionId;
 
     @Column(nullable = false)
-//  private String questionTitle;
+
     private String questionTitle;
     @Column(nullable = false)
     private String questionContent;
-//    private String questionContent;
+
 
     @Column
     private String questionHashtag; //해시태크 나중에 하기
@@ -34,6 +35,14 @@ public class Question {
 //    @Column(nullable = false)
 ////            ,updatable = false, unique = true)
 //    private String memberName; // 질문자
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER")
+    private Member member;
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
 //    @Enumerated(value = EnumType.STRING)
 //    @Column(length = 20, nullable = false)

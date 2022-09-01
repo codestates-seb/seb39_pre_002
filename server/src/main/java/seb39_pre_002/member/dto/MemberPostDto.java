@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class MemberPostDto {
 
-    private String mebmerEmail;
+    private String memberEmail;
     private String memberName;
     private String memberPassword;
 
