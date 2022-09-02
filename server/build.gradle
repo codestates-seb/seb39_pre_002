@@ -42,12 +42,19 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final' //mapper 때 추가함 2
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final' // mapper 때 추가함 2
 
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.boot:spring-boot-starter-security'//스프링 시큐리티
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'//스프링 시큐리티
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'//스프링 시큐리티
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'//오워스2
+	implementation 'com.auth0:java-jwt:3.19.2'//토큰jwt
+
 	implementation 'com.google.code.gson:gson'
 }
 
-//tasks.named('test') {
-//	useJUnitPlatform()
-//}
+tasks.named('test') {
+	useJUnitPlatform()
+}
 
 // (6)
 tasks.named('test') {
