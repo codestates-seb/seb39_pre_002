@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import botcheck from "./img/botcheck.png";
 
 function Signup() {
-  const [memberId, setMemberId] = useState("");
-  const [memberPassword, setMemberPassword] = useState("");
-  const [memberEmail, setMemberEmail] = useState("");
+  const idRegEx = /^[A-Za-z]{1}[A-Za-z0-9_-]{3,11}$/;
+  const passwordRegEx = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 
-  function signup() {
+  function linkToLogin() {
+    window.location.href = `http://localhost:3000/login`;
+    //아래 fetch 주소에 맞게 변경해야하나?..
+  }
+  function postForm(memberId, memberPassword, memberEmail) {
     fetch("http://15.164.53.160:8080/v1/members", {
       method: "POST",
       headers: {
@@ -22,10 +24,35 @@ function Signup() {
       }),
     }).then((res) => {
       if (res.status === 201) {
-        //(go to login page?) or (login success?? and main?)
+        linkToLogin();
       }
     });
   }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const memberId = event.target[0].value;
+    const memberEmail = event.target[1].value;
+    const memberPassword = event.target[2].value;
+    let Error = [];
+    if (memberId.match(idRegEx) === null) {
+      Error.push(
+        `Wrong ID : ${memberId} // ID should Start with caracter and 4~12 length`
+      );
+    }
+    if (memberPassword.match(passwordRegEx) === null) {
+      Error.push(
+        `Wrong password // password should have 1 caracter and 1 number and 1 special caracter with 8~16 length`
+      );
+    }
+    if (Error.length) {
+      console.log(Error.join("\n"));
+    }
+    if (!Error.length) {
+      linkToLogin(); // 아래 작업이 되어야 하지만 일단 post가 안되는 상황이라 로그인 이동만 체크
+      // postForm(memberId, memberPassword, memberEmail);
+    }
+  };
 
   return (
     <Main>
@@ -137,7 +164,7 @@ function Signup() {
                 <span className="marginUp">Sign up with Facebook</span>
               </button>
             </div>
-            <div className="form">
+            <div className="form" onSubmit={handleSubmit}>
               <form>
                 <div>
                   <label className="input-text">Display name</label>
@@ -326,8 +353,6 @@ export const Main = styled.div`
     border: 1px solid #d6d9dc;
     margin: 0px 0 4px 0;
     padding: 10px 10px 10px 10px;
-    min-height: auto;
-    min-width: auto;
     border-radius: 5px;
   }
 
@@ -336,17 +361,13 @@ export const Main = styled.div`
     line-height: 15px;
     text-decoration: none solid rgb(255, 255, 255);
     text-align: center;
-    word-spacing: 0px;
     background-color: #2f3337;
-    background-position: 0% 0%;
     color: #ffffff;
     height: 37px;
     width: 315px;
     border: 1px solid #d6d9dc;
     margin: 4px 0 4px 0;
     padding: 10px 10px 10px 10px;
-    min-height: auto;
-    min-width: auto;
     border-radius: 5px;
   }
   .top-facebook {
@@ -361,8 +382,6 @@ export const Main = styled.div`
     border: 1px solid #ffffff;
     margin: 4px 0 4px 0;
     padding: 10px 10px 10px 10px;
-    min-height: auto;
-    min-width: auto;
     border-radius: 5px;
   }
 
