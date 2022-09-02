@@ -1,7 +1,32 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import botcheck from "./img/botcheck.png";
 
 function Signup() {
+  const [memberId, setMemberId] = useState("");
+  const [memberPassword, setMemberPassword] = useState("");
+  const [memberEmail, setMemberEmail] = useState("");
+
+  function signup() {
+    fetch("http://15.164.53.160:8080/v1/members", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        memberId,
+        memberPassword,
+        memberEmail,
+      }),
+    }).then((res) => {
+      if (res.status === 201) {
+        //(go to login page?) or (login success?? and main?)
+      }
+    });
+  }
+
   return (
     <Main>
       <div className="content">
@@ -198,7 +223,7 @@ function Signup() {
               </div>
             </div>
             <div className="content-right-bottom-text">
-              Already have an account? <a>Log in</a>
+              Already have an account? <Link to={`/login`}>Log in</Link>
               <div>
                 Are you an employer?{" "}
                 <a>
@@ -280,6 +305,7 @@ export const Main = styled.div`
   }
   a {
     color: #0074cc;
+    text-decoration: none;
   }
   .marginUp {
     vertical-align: 4px;
