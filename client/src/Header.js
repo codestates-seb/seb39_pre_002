@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 function Header() {
-  const [isLogin, setIsLogin] = useState(true); //로그인 상태 구별 true로 바꿀 경우 기존 헤더
+  const [isLogin, setIsLogin] = useState(false); //로그인 상태 구별 true로 바꿀 경우 기존 헤더
   return (
     <>
       {isLogin === false ? (
@@ -48,10 +48,10 @@ function Header() {
             </div>
             <ol className="non-header-right">
               <li>
-                <a>Log in</a>
+                <Link to="/login">Log in</Link>
               </li>
               <li>
-                <a>Sign up</a>
+                <Link to="/signup">Sign up</Link>
               </li>
             </ol>
             <ol className="padding"></ol>
@@ -171,6 +171,7 @@ export const Main = styled.div`
   display: inline-block;
   height: 50px;
   border-bottom: 3px solid #efefef;
+
   .header-container {
     border-top: 3px solid #f48225;
     display: flex;
@@ -242,11 +243,25 @@ export const Main = styled.div`
       border: 1px solid #7aa7c7;
       background-color: #e1ecf3;
       color: #2c5877;
+      a {
+        text-decoration: none;
+      }
+      a:visited {
+        text-decoration: none;
+        color: #2c5877;
+      }
     }
     li:nth-child(2) {
       border: 1px solid #1095fa;
       background-color: #1095fa;
       color: #ffffff;
+      a {
+        text-decoration: none;
+      }
+      a:visited {
+        text-decoration: none;
+        color: #ffffff;
+      }
     }
   }
   .nonLogin {
