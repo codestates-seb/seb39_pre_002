@@ -18,7 +18,14 @@ public class QuestionDto {
 
         private String questionContent;
 
-        private String memberId; // 회원 아이디
+        private String username; // 회원 아이디
+
+        private String questionHashtag;
+
+        private LocalDateTime createdAt;
+
+
+        private LocalDateTime modifiedAt;
     }
 
 
@@ -33,7 +40,7 @@ public class QuestionDto {
 
         private String questionContent; // 질문 등록
 
-        private String memberId;
+        private String username;
 
 
         public void setQuestionId(long questionId) {
@@ -45,12 +52,11 @@ public class QuestionDto {
     @AllArgsConstructor
     public static class Response {
         private long questionId;
-
         private String questionTitle;   // 질문 제목
 
         private String questionContent;
 
-        private String memberId; // 회원 아이디
+        private String username; // 회원 아이디
     }
 
 }

@@ -3,8 +3,8 @@ package seb39_pre_002.question.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+
+
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,13 @@ public class QuestionPostDto {
 
         private String questionContent;
 
-        private String memberId; // 회원 아이디
+        private String questionHashtag;
+
+        private String username; // 회원 아이디
+
+        private LocalDateTime createdAt;
+
+        private LocalDateTime modifiedAt;
 
 
 

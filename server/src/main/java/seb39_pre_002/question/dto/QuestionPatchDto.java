@@ -15,9 +15,15 @@ public class QuestionPatchDto {
 
     private String questionContent; // 질문 등록
 
-    private String memberId;
+    private String questionHashtag;
+
+    private String username;
 
 
+    private LocalDateTime createdAt;
+
+
+    private LocalDateTime modifiedAt;
 
 
 

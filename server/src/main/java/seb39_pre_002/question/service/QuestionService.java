@@ -27,44 +27,50 @@ public class QuestionService {
         this.publisher = publisher;
     }
 
-    // 등록
+    // ToDo 등록
     public Question createQuestion(Question question) {
 
         question.setCreatedAt(LocalDateTime.now());
 
         return questionRepository.save(question);
     }
-    //질문 하나 조회
+    // ToDo 질문 하나 조회
     public Question findQuestion(long questionId) {
         return findVerifiedQuestion(questionId);
     }
 
-    //전체 조회
-    public Page<Question> findQuestions(int page, int size) {
-
-        return questionRepository.findAll(PageRequest.of(page, size,Sort.by("questionId").ascending()));
+    // ToDo  조회
+    public List<Question> findQuestions() {
+        return (List<Question>) questionRepository.findAll();
     }
-    // 수정
 
+//    // ToDo 전체 조회 page
+//    public Page<Question> findQuestions(int page, int size) {
+//
+//        return questionRepository.findAll(PageRequest.of(page, size,Sort.by("questionId").ascending()));
+//    }
+
+    // ToDo 수정
     public Question updateQuestion(Question question){
         Optional.ofNullable(question.getQuestionTitle())
                 .ifPresent(questionTitle -> question.setQuestionTitle(questionTitle));
         Optional.ofNullable(question.getQuestionContent())
                 .ifPresent(questionContent -> question.setQuestionContent(questionContent));
-
+        Optional.ofNullable(question.getQuestionHashtag())
+                .ifPresent(questionHashtag-> question.setQuestionHashtag(questionHashtag));
 
         question.setModifiedAt(LocalDateTime.now());
 
         return questionRepository.save(question);
     }
-    // 삭제
+    // ToDo 삭제
     public void deleteQuestion(long questionId) {
 
         Question findQuestion = findVerifiedQuestion(questionId);
         questionRepository.delete(findQuestion);
     }
 
-    //존재하는 질문인지 검증  이부분은 이해 불가 ㅠㅠ
+    // ToDo 존재하는 질문인지 검증  이부분은 이해 불가 ㅠㅠ
     public Question findVerifiedQuestion(long questionId) {
         Optional<Question> optionalQuestion =
                 questionRepository.findById(questionId);
@@ -72,5 +78,6 @@ public class QuestionService {
                 new BusinessLogicException(ExceptionCode.QUESTIONS_NOT_FOUND));
 
         return findQuestion;
+
     }
 }

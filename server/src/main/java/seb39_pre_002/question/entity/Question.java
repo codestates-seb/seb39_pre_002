@@ -4,9 +4,13 @@ package seb39_pre_002.question.entity;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import seb39_pre_002.answer.entity.Answer;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*********************************
@@ -23,6 +27,7 @@ import java.time.LocalDateTime;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "QUESTION_ID")
     private long questionId;      //질문 아이디
 
     @Column(nullable = false)
@@ -30,7 +35,9 @@ public class Question {
 
     private String questionContent;   // 질문 내용
 
-    private String memberId; // 회원 아이디
+    private String questionHashtag; //해시태그
+
+    private String username; // 회원 아이디
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -38,10 +45,14 @@ public class Question {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers = new ArrayList<>();
 
-    public Question(String questionTitle, String questionContent, String memberId) {
+
+
+    public Question(String questionTitle, String questionContent, String username) {
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
-        this.memberId = memberId;
+        this.username = username;
     }
 }
