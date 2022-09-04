@@ -1,0 +1,36 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:test
+  jpa:
+    hibernate:
+      ddl-auto: create  # (1) 스키마 자동 생성
+    show-sql: true      # (2) SQL 쿼리 출력
+# 트랜잭션
+  logging:
+    level:
+      org:
+        springframework:
+          orm:
+            jpa: DEBUG
+
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://15.164.53.160:13306/seb39_pre_002?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+#    username: seb39_pre_002
+#    password: seb39_pre_002
+#
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    open-in-view: false
+#    hibernate:
+#      format_sql: true
+#      ddl-auto: none
+#    show-sql: true
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher

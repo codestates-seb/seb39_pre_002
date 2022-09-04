@@ -10,4 +10,5 @@ public class Seb39Pre002Application {
 		SpringApplication.run(Seb39Pre002Application.class, args);
 	}
 
+
 }
