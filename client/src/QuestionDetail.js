@@ -4,18 +4,52 @@ import useFetch from "./useFetch";
 import Sidebar from "./Sidebar";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Editor from "./Editor";
+import Answer from "./Answer";
+import { useState } from "react";
+import {useNavigate} from 'react-router-dom'
 
 
-const QuestionDetail = () => {
+const QuestionDetail = (  ) => {
+
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data, error } = useFetch("http://localhost:3001/data/" + id);
+  // const { data, error } = useFetch("http://15.164.53.160:8080/v1/questions/" + id);
+
+  const handleDelete = () => {
+    fetch('http://localhost:3001/data/' + data.id, {
+        method: 'DELETE'
+    }).then(()=> {
+        navigate('/')
+    })
+}
+  
 
   const question_views = 0;
+
+  
 
   let now = new Date();
   let year = now.getFullYear();
   let month = now.getMonth();
   let date = now.getDate();
+
+
+  const [comment, setComment] = useState('');
+  const onChange = event => setComment(event.target.value);
+
+  const [commentArray, setCommentArray] = useState([]);
+  const onSubmit = event => {
+    event.preventDefault();
+    if (comment === '') {
+      return;
+    }
+    setCommentArray(commentValueList => [comment, ...commentValueList]);
+    setComment('');
+  };
+
+ 
 
   return (
     <>
@@ -24,7 +58,8 @@ const QuestionDetail = () => {
         <Body>
           <Sidebar />
           <Div>
-            <h2>{data.title}</h2>
+            {/* <h2>{data.data.questionTitle}</h2> */}
+            <h2>{data.questionTitle}</h2>
             <p>
               <span>
                 Asked <strong>{`${year}/${month}/${date}`}</strong>
@@ -37,32 +72,35 @@ const QuestionDetail = () => {
               </span>
             </p>
             <hr></hr>
-            <section>{data.content}</section>
-            <Link to="/modify">
+            {/* <section>{data.data.questionContent}</section> */}
+            <section>{data.questionContent}</section>
+            <Link to="/questions/:id/modify">
               <EditDeleteButton>Edit</EditDeleteButton>
             </Link>
-            <EditDeleteButton>Delete</EditDeleteButton>
+            <EditDeleteButton onClick={handleDelete}>Delete</EditDeleteButton>
+
+            <div className="answerContainer">
+              {commentArray.map((value, index) =>(
+                <div key={index} className="answer">
+                  {value} <span className="answerName">- junho01234</span>
+                </div>
+              ))}
+            </div>
+            
+            <form onSubmit={onSubmit}>          
             <label>Your Answer</label>
-            <CKEditor                                                                   
-                    editor={ ClassicEditor }
-                    data=""
-                    onReady={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
-                    } }
-                    onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        console.log( { event, editor, data } );
-                    } }
-                    onBlur={ ( event, editor ) => {
-                        console.log( 'Blur.', editor );
-                    } }
-                    onFocus={ ( event, editor ) => {
-                        console.log( 'Focus.', editor );
-                    } }
-                />
+            <textarea
+              required
+              placeholder="답변을 입력해주세요"
+              value={comment}
+              onChange={onChange}
+            ></textarea>
+            {/* <Editor /> */}
             <PostButton>Post Your Answer</PostButton>
+            </form> 
           </Div>
+
+
           <PostIt>
             <article className="postItTitle">The Overflow Blog</article>
             <article className="postItContent">
@@ -100,6 +138,7 @@ const Div = styled.div`
 
   margin: 50px 50px 50px 100px;
   text-align: left;
+  min-width: 350px;
   max-width: 800px;
 
   label {
@@ -124,11 +163,14 @@ const Div = styled.div`
     line-height: 150%;
   }
 
-  .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-       min-height: 250px;
-       max-height: 250px;
-       margin-bottom: 20px;
-   }    
+  .answer {
+    margin: 20px 20px 20px 0px;
+  }
+
+  .answerName {
+    color: hsl(206, 100%, 52%);
+  }
+  
 `;
 
 

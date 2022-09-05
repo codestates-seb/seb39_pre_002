@@ -2,9 +2,15 @@ import Question from "./Question";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { useEffect } from "react";
 
 function Body({ data }) {
   function handleClick(event, id) {}
+
+  useEffect(() =>{
+
+  },)
+
 
   return (
     <Main>

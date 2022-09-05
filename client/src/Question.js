@@ -21,7 +21,7 @@ export default function Question({ data, key, handleClick }) {
       </div>
       <div>
         <h3>
-          <Link to={`/questions/${data.questionId}`}>{data.questionTitle}</Link>
+          <Link to={`/questions/${data.id}`}>{data.questionTitle}</Link>
         </h3>
         <div className="body-bottom">
           {/* <div>
@@ -47,7 +47,7 @@ export default function Question({ data, key, handleClick }) {
           <div>
             <div>
               <a href="" className="name">
-                {/* {data.memberName} */}
+                {data.memberName}
               </a>
             </div>
 
@@ -59,10 +59,10 @@ export default function Question({ data, key, handleClick }) {
           </div>
 
           <time>
-            <a className="time" href="">
-              {/* {data.questionStatus} */}
+            {/* <a className="time" href="">
+              {data.questionStatus}
               <span title="postedTime">xx sec ago</span>
-            </a>
+            </a> */}
           </time>
         </div>
       </div>
