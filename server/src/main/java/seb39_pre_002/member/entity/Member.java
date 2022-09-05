@@ -10,6 +10,7 @@ import seb39_pre_002.question.entity.Question;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -37,6 +38,13 @@ public class Member {
     private String email;
     private String role;
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public List<String> getRoleList() {
+        if(this.role.length() > 0) {
+            return Arrays.asList(this.role.split(","));
+        }
+        return new ArrayList<>();
+    }
 
     private String provider;
     private String providerId;

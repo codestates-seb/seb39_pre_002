@@ -31,15 +31,25 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collection = new ArrayList<>();
-        collection.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return member.getRole();
-            }
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        member.getRoleList().forEach(n -> {
+            authorities.add(() -> n);
         });
-        return collection;
+        return authorities;
     }
+
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        Collection<GrantedAuthority> collection = new ArrayList<>();
+//        collection.add(new GrantedAuthority() {
+//            @Override
+//            public String getAuthority() {
+//                return member.getRole();
+//            }
+//        });
+//        return collection;
+//    }
 
     @Override
     public String getPassword() {

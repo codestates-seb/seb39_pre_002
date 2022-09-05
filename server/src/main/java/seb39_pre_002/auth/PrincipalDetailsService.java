@@ -14,13 +14,19 @@ public class PrincipalDetailsService implements UserDetailsService {
     @Autowired
     private MemberRepository memberRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member memberEntity = memberRepository.findByUsername(username);
-        System.out.println("username : " + username);
-        if(memberEntity != null) {
-            return new PrincipalDetails(memberEntity);
-        }
-        return null;
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        Member memberEntity = memberRepository.findByUsername(username);
+//        System.out.println("username : " + username);
+//        if(memberEntity != null) {
+//            return new PrincipalDetails(memberEntity);
+//        }
+//        return null;
+//    }
+//}
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Member memberEntity = memberRepository.findByUsername(username);
+    return new PrincipalDetails(memberEntity);
+}
 }
