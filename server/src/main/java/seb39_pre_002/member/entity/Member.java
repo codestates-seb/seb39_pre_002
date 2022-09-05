@@ -4,12 +4,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import seb39_pre_002.answer.entity.Answer;
+import seb39_pre_002.question.entity.Question;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -28,7 +29,9 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
+
     private String username;
     private String password;
     private String email;
@@ -37,4 +40,7 @@ public class Member {
 
     private String provider;
     private String providerId;
-}
+
+
+    @OneToMany(mappedBy = "member")
+    private List<Question> questions = new ArrayList<>();}

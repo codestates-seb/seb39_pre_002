@@ -27,7 +27,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().disable();
-        http.csrf().disable();
+        http.csrf().disable(); //포스트맨 안되는 이유?
         http.headers().frameOptions().disable();
 
 //        http.addFilterAfter(new FirstFilter(), LogoutFilter.class);

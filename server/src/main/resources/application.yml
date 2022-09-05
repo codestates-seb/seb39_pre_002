@@ -4,8 +4,8 @@
         client:
           registration:
             google:
-              clientId:
-              clientSecret:
+              clientId: 1037958436167-c0008ersann5n6p5vqk9m29o7778cfl2.apps.googleusercontent.com
+              clientSecret: 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
               scope:
                 - email
                 - profile

@@ -49,13 +49,13 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private List<Answer> answers = new ArrayList<>();
 
-//    @ManyToOne   // (1)
-//    @JoinColumn(name = "MEMBER_ID")  // (2)
-//    private Member member;
-//
-//    public void addMember(Member member) {
-//        this.member = member;
-//    }
+    @ManyToOne   // (1)
+    @JoinColumn(name = "ID")
+    private Member member;
+
+    public void addMember(Member member) {
+        this.member = member;
+    }
 
 
     public Question(String questionTitle, String questionContent, String username) {
