@@ -6,6 +6,7 @@ import seb39_pre_002.answer.repositiry.AnswerRepository;
 import seb39_pre_002.exception.BusinessLogicException;
 import seb39_pre_002.exception.ExceptionCode;
 import seb39_pre_002.question.entity.Question;
+import seb39_pre_002.question.repositiry.QuestionRepository;
 import seb39_pre_002.question.service.QuestionService;
 
 import java.time.LocalDateTime;
@@ -18,19 +19,24 @@ public class AnswerService {
     private final AnswerRepository answerRepository;
 
     private final QuestionService questionService;
+    private final QuestionRepository questionRepository;
 
 
-
-    public AnswerService(AnswerRepository answerRepository,QuestionService questionService ) {
+    public AnswerService(AnswerRepository answerRepository,QuestionService questionService, QuestionRepository questionRepository ) {
         this.answerRepository = answerRepository;
         this.questionService = questionService;
+        this.questionRepository = questionRepository;
 
     }
 
     // ToDo 답변 등록
-    public Answer createAnswer(Answer answer) {
+    public Answer createAnswer(long questionId, Answer answer) {
 
 //        verifyAnswer(answer);
+        Question question = questionRepository.findById(questionId).orElseThrow(()-> {
+            return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 아이디를 찾을 수 없음");
+        });
+        answer.setQuestion(question);
         answer.setCreatedAt(LocalDateTime.now());
 
         return answerRepository.save(answer);

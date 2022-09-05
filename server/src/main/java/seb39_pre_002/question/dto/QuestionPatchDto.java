@@ -17,7 +17,7 @@ public class QuestionPatchDto {
 
     private String questionHashtag;
 
-    private String username;
+    private String memberId;
 
 
     private LocalDateTime createdAt;

@@ -17,7 +17,7 @@ public class AnswerDto {
 
     private String answerContent;
 
-    private String username;
+    private String memberId;
 
     private LocalDateTime createdAt;
 

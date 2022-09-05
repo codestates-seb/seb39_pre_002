@@ -1,22 +1,18 @@
 package seb39_pre_002.member.dto;
 
 import lombok.Getter;
+import seb39_pre_002.member.entity.Member;
 
 @Getter
 public class MemberPatchDto {
-    private long id;
+    private long memberId;
+    private String memberEmail;
+    private String memberName;
+    private String memberPassword;
 
-    private String username;
-    private String password;
+    private Member.MemberStatus memberStatus;
 
-    private String roles;
-
-    private String provider;
-    private String providerId;
-
-//        private Member.MemberStatus memberStatus;
-
-    public void setId(long id) {
-        this.id = id;
+    public void setMemberId(long memberId) {
+        this.memberId = memberId;
     }
 }

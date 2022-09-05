@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import seb39_pre_002.member.entity.Member;
 import seb39_pre_002.question.entity.Question;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Answer {
     @Column(nullable = false)
     private String answerContent;
 
-    private String username;
+    private long memberId;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -33,4 +34,23 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public Answer(String answerContent, long memberId,Question question) {
+        this.answerContent = answerContent;
+        this.memberId = memberId;
+        this.question = question;
+    }
 }
+
+//    @ManyToOne
+//    @JoinColumn
+//    private Member member;
+//
+//    public void setMember(Member member) {
+//        this.member = member;
+//    }
+//}

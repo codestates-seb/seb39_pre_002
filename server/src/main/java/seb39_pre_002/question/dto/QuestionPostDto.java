@@ -19,7 +19,7 @@ public class QuestionPostDto {
 
         private String questionHashtag;
 
-        private String username; // 회원 아이디
+        private String memberId; // 회원 아이디
 
         private LocalDateTime createdAt;
 

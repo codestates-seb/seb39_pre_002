@@ -1,18 +1,21 @@
 package seb39_pre_002.member.dto;
 
+import lombok.Builder;
+import lombok.Getter;
+import seb39_pre_002.member.entity.Member;
+
+@Builder
+@Getter
+
 public class MemberResponseDto {
-    private long id;
-    private String email;
-    private String username;
-    private String password;
-    private String roles;
+    private long memberId;
+    private String memberEmail;
+    private String memberName;
+    private String memberPassword;
 
-    private String provider;
-    private String providerId;
-//        private Member.MemberStatus memberStatus;
-//
-//        public String getMemberStatus() {
-//            return memberStatus.getStatus();
-//        }
+    private Member.MemberStatus memberStatus;
+
+    public String getMemberStatus() {
+        return memberStatus.getStatus();
+    }
 }
-

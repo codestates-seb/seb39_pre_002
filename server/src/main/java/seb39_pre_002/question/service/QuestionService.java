@@ -8,6 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import seb39_pre_002.exception.BusinessLogicException;
 import seb39_pre_002.exception.ExceptionCode;
+import seb39_pre_002.member.entity.Member;
+import seb39_pre_002.member.repository.MemberRepository;
+import seb39_pre_002.member.service.MemberService;
 import seb39_pre_002.question.entity.Question;
 import seb39_pre_002.question.repositiry.QuestionRepository;
 
@@ -19,17 +22,24 @@ import java.util.Optional;
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;
-    private final ApplicationEventPublisher publisher;
+    private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
-    public QuestionService(QuestionRepository questionRepository,
-                           ApplicationEventPublisher publisher) {
+
+    public QuestionService(QuestionRepository questionRepository, MemberService memberService, MemberRepository memberRepository) {
         this.questionRepository = questionRepository;
-        this.publisher = publisher;
+        this.memberService = memberService;
+        this.memberRepository = memberRepository;
+
     }
 
     // ToDo 등록
     public Question createQuestion(Question question) {
 
+//        Member member = memberRepository.findById(memberId).orElseThrow(()-> {
+//            return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 아이디를 찾을 수 없음");
+//        });
+//        question.setMember(member);
         question.setCreatedAt(LocalDateTime.now());
 
         return questionRepository.save(question);
@@ -44,7 +54,7 @@ public class QuestionService {
         return (List<Question>) questionRepository.findAll();
     }
 
-//    // ToDo 전체 조회 page
+    // ToDo 전체 조회 page
 //    public Page<Question> findQuestions(int page, int size) {
 //
 //        return questionRepository.findAll(PageRequest.of(page, size,Sort.by("questionId").ascending()));

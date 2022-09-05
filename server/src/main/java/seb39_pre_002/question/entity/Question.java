@@ -1,6 +1,7 @@
 package seb39_pre_002.question.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -38,7 +39,7 @@ public class Question {
 
     private String questionHashtag; //해시태그
 
-    private String username; // 회원 아이디
+    private long memberId; // 회원 아이디
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -46,21 +47,28 @@ public class Question {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"question"})
     private List<Answer> answers = new ArrayList<>();
 
-    @ManyToOne   // (1)
-    @JoinColumn(name = "ID")
-    private Member member;
+//    @ManyToOne   // (1)
+//    @JoinColumn
+//    private Member member;
+//
+//    public void setMember(Member member) {
+//        this.member = member;
+//    }
+//
+//    public void setAnswer(Answer answer) {
+//        answers.add(answer);
+//        if (answer.getQuestion() !=this) {
+//            answer.getQuestion();
+//        }
+//    }
 
-    public void addMember(Member member) {
-        this.member = member;
-    }
-
-
-    public Question(String questionTitle, String questionContent, String username) {
+    public Question(String questionTitle, String questionContent, long memberId) {
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
-        this.username = username;
+        this.memberId = memberId;
     }
 }

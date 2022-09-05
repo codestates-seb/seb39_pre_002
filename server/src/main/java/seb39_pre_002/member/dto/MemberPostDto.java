@@ -1,13 +1,14 @@
 package seb39_pre_002.member.dto;
 
+
 import lombok.Getter;
 
+//유효성 안 넣음
 @Getter
 public class MemberPostDto {
-    private String email;
-    private String username;
-    private String password;
-    private String provider;
-    private String providerId;
-    private String roles;
+
+    private String memberEmail;
+    private String memberName;
+    private String memberPassword;
+
 }

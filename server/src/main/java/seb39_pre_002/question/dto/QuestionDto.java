@@ -18,7 +18,7 @@ public class QuestionDto {
 
         private String questionContent;
 
-        private String username; // 회원 아이디
+        private String memberId; // 회원 아이디
 
         private String questionHashtag;
 
@@ -40,7 +40,7 @@ public class QuestionDto {
 
         private String questionContent; // 질문 등록
 
-        private String username;
+        private String memberId;
 
 
         public void setQuestionId(long questionId) {
@@ -56,7 +56,7 @@ public class QuestionDto {
 
         private String questionContent;
 
-        private String username; // 회원 아이디
+        private String memberId; // 회원 아이디
     }
 
 }
