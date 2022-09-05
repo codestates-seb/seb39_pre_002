@@ -3,6 +3,9 @@ package seb39_pre_002.answer.mapper;
 import org.mapstruct.Mapper;
 import seb39_pre_002.answer.dto.AnswerDto;
 import seb39_pre_002.answer.entity.Answer;
+import seb39_pre_002.question.dto.QuestionDto;
+import seb39_pre_002.question.dto.QuestionPostDto;
+import seb39_pre_002.question.entity.Question;
 
 import java.util.List;
 

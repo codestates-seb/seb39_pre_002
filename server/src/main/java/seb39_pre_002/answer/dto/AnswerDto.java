@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import seb39_pre_002.question.entity.Question;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +14,7 @@ public class AnswerDto {
 
     private long answerId;
 
-    private long questionId;
+    private Question question;
 
     private String answerContent;
 

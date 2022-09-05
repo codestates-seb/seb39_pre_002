@@ -33,4 +33,14 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public Answer(String answerContent, String username,Question question) {
+        this.answerContent = answerContent;
+        this.username = username;
+        this.question = question;
+    }
 }

@@ -1,6 +1,7 @@
 package seb39_pre_002.question.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -45,14 +46,21 @@ public class Question {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"question"})
     private List<Answer> answers = new ArrayList<>();
 
-
+    public void setAnswer(Answer answer) {
+        answers.add(answer);
+        if (answer.getQuestion() !=this) {
+            answer.getQuestion();
+        }
+    }
 
     public Question(String questionTitle, String questionContent, String username) {
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
         this.username = username;
     }
+
 }
