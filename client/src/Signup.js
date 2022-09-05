@@ -32,7 +32,7 @@ function Signup() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // const memberId = event.target[0].value;
-    const username = event.target[0].value;
+    const memberId = event.target[0].value;
     const memberEmail = event.target[1].value;
     const memberPassword = event.target[2].value;
     let Error = [];
@@ -46,9 +46,9 @@ function Signup() {
     //     `Wrong password\npassword should have 1 caracter and 1 number and 1 special caracter with 8~16 length`
     //   );
     // }
-    if (username.match(idRegEx) === null) {
+    if (memberId.match(idRegEx) === null) {
       Error.push(
-        `Wrong ID : ${username}\nID should Start with caracter and 4~12 length`
+        `Wrong ID : ${memberId}\nID should Start with caracter and 4~12 length`
       );
     }
     if (memberPassword.match(passwordRegEx) === null) {
@@ -61,15 +61,11 @@ function Signup() {
       // console.log(Error.join("\n"));
     }
     if (!Error.length) {
-      // alert(
-      //   `congratulation!  ${memberId}\nNow you can Log in to stackoverflow`
-      // );
       alert(
-        `congratulation!  ${username}\nNow you can Log in to stackoverflow`
+        `congratulation!  ${memberId}\nNow you can Log in to stackoverflow`
       );
       // linkToLogin(); // 아래 작업이 되어야 하지만 일단 post가 안되는 상황이라 로그인 이동만 체크
-      // postForm(memberId, memberPassword, memberEmail);
-      postForm(username, memberPassword, memberEmail);
+      postForm(memberId, memberPassword, memberEmail);
     }
   };
 

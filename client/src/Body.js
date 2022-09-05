@@ -2,9 +2,87 @@ import Question from "./Question";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { useState } from "react";
 
 function Body({ data }) {
+  const [now, setNow] = useState(1);
   function handleClick(event, id) {}
+  function nowHandler(event) {
+    if (
+      event.target.textContent === "Prev" &&
+      event.target.textContent !== "1"
+    ) {
+      setNow(now - 1);
+      console.log(now - 1);
+    } else if (
+      event.target.textContent === "Next" &&
+      event.target.textContent !== dummyPagenation.pageInfo.totalPages
+    ) {
+      setNow(now + 1);
+      console.log(now + 1);
+    } else if (event.target.textContent !== String(now)) {
+      setNow(Number(event.target.textContent));
+      console.log(Number(event.target.textContent));
+    }
+    // console.log(event.target.textContent);
+  }
+  let dummyPagenation = {
+    data: [
+      {
+        questionId: 1,
+        questionTitle: "제목",
+        questionContent: "내용",
+        memberId: "작성자id",
+      },
+      {
+        questionId: 2,
+        questionTitle: "제목1",
+        questionContent: "내용2",
+        memberId: "작정사Id",
+      },
+    ],
+    pageInfo: {
+      page: 1,
+      size: 10,
+      totalElements: 200,
+      totalPages: 14,
+    },
+  };
+
+  let pages = [];
+  if (Number(now) === 1) {
+    pages = [];
+    for (
+      let i = 1;
+      i <= Math.min(5, dummyPagenation.pageInfo.totalPages);
+      i++
+    ) {
+      pages.push(i);
+    }
+    if (dummyPagenation.pageInfo.totalPages > 5) {
+      pages.push("...");
+      pages.push(dummyPagenation.pageInfo.totalPages);
+      pages.push("Next");
+    } else if (dummyPagenation.pageInfo.totalPages > 1) {
+      pages.push("Next");
+    }
+  } else if (Number(now) <= 4) {
+    pages = ["Prev"];
+    for (
+      let i = 1;
+      i <= Math.min(5, dummyPagenation.pageInfo.totalPages);
+      i++
+    ) {
+      pages.push(i);
+    }
+    if (dummyPagenation.pageInfo.totalPages > 5) {
+      pages.push("...");
+      pages.push(dummyPagenation.pageInfo.totalPages);
+      pages.push("Next");
+    } else if (dummyPagenation.pageInfo.totalPages > Number(now)) {
+      pages.push("Next");
+    }
+  }
 
   return (
     <Main>
@@ -64,6 +142,15 @@ function Body({ data }) {
             ))}
           </div>
         ) : null}
+        <div>
+          <div className="float-left">
+            {pages.map((el) => (
+              <a onClick={nowHandler} id={el} className="pageBox">
+                {el}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </Main>
   );
@@ -159,6 +246,15 @@ export const Main = styled.div`
     padding: 10px 10px 10px 10px;
 
     cursor: pointer;
+  }
+  .pageBox {
+    font-size: 13px;
+    line-height: 25px;
+    height: 27px;
+    width: 25.2344px;
+    border: 1px solid #babfc4;
+    margin: 0 2px 0 2px;
+    padding: 0 8px 0 8px;
   }
 `;
 
