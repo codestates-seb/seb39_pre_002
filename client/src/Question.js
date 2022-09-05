@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Question({ data, key, handleClick }) {
   return (
     <Body key={key}>
-      <div class="left-box">
+      <div className="left-box">
         <div className="left-text" title="Score of 0">
           <span>10</span>
           <span>votes</span>

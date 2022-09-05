@@ -8,19 +8,19 @@ function Signup() {
 
   function linkToLogin() {
     window.location.href = `http://localhost:3000/login`;
-    //아래 fetch 주소에 맞게 변경해야하나?..
   }
-  function postForm(memberId, memberPassword, memberEmail) {
-    fetch("http://15.164.53.160:8080/v1/members", {
+  function postForm(username, password, email) {
+    fetch("http://15.164.53.160:8080/join", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        memberId,
-        memberPassword,
-        memberEmail,
+        // memberId,
+        username,
+        password,
+        email,
       }),
     }).then((res) => {
       if (res.status === 201) {
@@ -31,26 +31,45 @@ function Signup() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const memberId = event.target[0].value;
+    // const memberId = event.target[0].value;
+    const username = event.target[0].value;
     const memberEmail = event.target[1].value;
     const memberPassword = event.target[2].value;
     let Error = [];
-    if (memberId.match(idRegEx) === null) {
+    // if (memberId.match(idRegEx) === null) {
+    //   Error.push(
+    //     `Wrong ID : ${memberId}\nID should Start with caracter and 4~12 length`
+    //   );
+    // }
+    // if (memberPassword.match(passwordRegEx) === null) {
+    //   Error.push(
+    //     `Wrong password\npassword should have 1 caracter and 1 number and 1 special caracter with 8~16 length`
+    //   );
+    // }
+    if (username.match(idRegEx) === null) {
       Error.push(
-        `Wrong ID : ${memberId} // ID should Start with caracter and 4~12 length`
+        `Wrong ID : ${username}\nID should Start with caracter and 4~12 length`
       );
     }
     if (memberPassword.match(passwordRegEx) === null) {
       Error.push(
-        `Wrong password // password should have 1 caracter and 1 number and 1 special caracter with 8~16 length`
+        `Wrong password\npassword should have 1 caracter and 1 number and 1 special caracter with 8~16 length`
       );
     }
     if (Error.length) {
-      console.log(Error.join("\n"));
+      alert(Error.join("\n\n"));
+      // console.log(Error.join("\n"));
     }
     if (!Error.length) {
-      linkToLogin(); // 아래 작업이 되어야 하지만 일단 post가 안되는 상황이라 로그인 이동만 체크
+      // alert(
+      //   `congratulation!  ${memberId}\nNow you can Log in to stackoverflow`
+      // );
+      alert(
+        `congratulation!  ${username}\nNow you can Log in to stackoverflow`
+      );
+      // linkToLogin(); // 아래 작업이 되어야 하지만 일단 post가 안되는 상황이라 로그인 이동만 체크
       // postForm(memberId, memberPassword, memberEmail);
+      postForm(username, memberPassword, memberEmail);
     }
   };
 
