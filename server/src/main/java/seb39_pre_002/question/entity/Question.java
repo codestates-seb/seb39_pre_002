@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import seb39_pre_002.answer.entity.Answer;
+import seb39_pre_002.member.entity.Member;
 
 
 import javax.persistence.*;
@@ -48,6 +49,13 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private List<Answer> answers = new ArrayList<>();
 
+//    @ManyToOne   // (1)
+//    @JoinColumn(name = "MEMBER_ID")  // (2)
+//    private Member member;
+//
+//    public void addMember(Member member) {
+//        this.member = member;
+//    }
 
 
     public Question(String questionTitle, String questionContent, String username) {

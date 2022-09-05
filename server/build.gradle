@@ -1,7 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-	id "org.asciidoctor.jvm.convert" version "3.3.2"
+	id "org.asciidoctor.jvm.convert" version "3.3.2"    // Spring Rest Docs
 	id 'java'
 }
 
@@ -10,7 +10,9 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	asciidoctorExtensions
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
 }
 
 repositories {
@@ -21,27 +23,38 @@ ext {
 	set('snippetsDir', file("build/generated-snippets"))
 }
 
+configurations {
+	asciidoctorExtensions
+}
+
 dependencies {
 
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'//몫
+	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor' //docs
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'mysql:mysql-connector-java'
-	implementation 'org.springframework.boot:spring-boot-starter-jta-atomikos'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //jpa 추가 3
+	implementation 'org.springframework.boot:spring-boot-starter-validation' // valided 때 추가함 1
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.1.Final' //mapper 때 추가함 2 매퍼자동생성
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final' // mapper 때 추가함 2
 
-	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.boot:spring-boot-starter-security'//스프링 시큐리티
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'//스프링 시큐리티
+//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'//스프링 시큐리티
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'//오워스2
+	implementation 'com.auth0:java-jwt:3.19.2'//토큰jwt
+
 	implementation 'com.google.code.gson:gson'
 }
 
+tasks.named('test') {
+	useJUnitPlatform()
+}
 
 // (6)
 tasks.named('test') {
@@ -71,6 +84,6 @@ build {
 bootJar {
 	dependsOn copyDocument    // (10-1)
 	from ("${asciidoctor.outputDir}") {  // (10-2)
-		into 'static/docs'     // (10-3)
+		into 'src/main/resources/static/docs'     // (10-3)
 	}
 }
