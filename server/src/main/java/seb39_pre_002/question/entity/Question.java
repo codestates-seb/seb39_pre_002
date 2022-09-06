@@ -46,8 +46,8 @@ public class Question {
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"question"})
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL) // 영속전이
+    @JsonIgnoreProperties({"question"}) // 순환 참조
     private List<Answer> answers = new ArrayList<>();
 
     public void setAnswer(Answer answer) {

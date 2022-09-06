@@ -53,8 +53,8 @@ public class AnswerController {
 
     }
 
-    @GetMapping
-    public ResponseEntity getAnswers() {
+    @GetMapping("")
+    public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId) {
         List<Answer> answers = answerService.findAnswers();
 
         return new ResponseEntity(new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answers)), HttpStatus.OK);
@@ -76,7 +76,7 @@ public class AnswerController {
         requestBody.setAnswerId(answerId);
 
         Answer answer =
-                answerService.updateAnswer(mapper.answerPatchToAnswer(requestBody));
+                answerService.updateAnswer(questionId,mapper.answerPatchToAnswer(requestBody));
 
 
         return new ResponseEntity(new SingleResponseDto<>(mapper.answerToAnswerDtoResponse(answer)), HttpStatus.OK);

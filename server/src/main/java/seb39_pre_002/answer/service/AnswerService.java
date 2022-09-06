@@ -58,12 +58,17 @@ public class AnswerService {
     }
 
     // ToDo 답변 수정
-    public Answer updateAnswer(Answer answer) {
+    public Answer updateAnswer(long questionId,Answer answer) {
         Optional.ofNullable(answer.getAnswerContent())
                 .ifPresent(answerContent -> answer.setAnswerContent(answerContent));
 
+        Question question = questionRepository.findById(questionId).orElseThrow(()-> {
+            return new IllegalArgumentException("댓글 수정 실패 : 게시글 아이디를 찾을 수 없음");
+        });
+
         answer.setModifiedAt(LocalDateTime.now());
-        answer.getModifiedAt();
+        answer.setQuestion(question);
+
         return answerRepository.save(answer);
     }
 
