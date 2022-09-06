@@ -5,24 +5,27 @@ import Sidebar from "./Sidebar";
 import { useState } from "react";
 
 function Body({ data }) {
-  const [now, setNow] = useState(1);
   function handleClick(event, id) {}
+  const [now, setNow] = useState(1);
   function nowHandler(event) {
     if (
       event.target.textContent === "Prev" &&
       event.target.textContent !== "1"
     ) {
       setNow(now - 1);
-      console.log(now - 1);
+      // console.log(now - 1);
     } else if (
       event.target.textContent === "Next" &&
       event.target.textContent !== dummyPagenation.pageInfo.totalPages
     ) {
       setNow(now + 1);
-      console.log(now + 1);
-    } else if (event.target.textContent !== String(now)) {
+      // console.log(now + 1);
+    } else if (Number(event.target.textContent)) {
       setNow(Number(event.target.textContent));
-      console.log(Number(event.target.textContent));
+      // console.log(Number(event.target.textContent), 1);
+    } else {
+      // console.log(event.target.textContent, 2, now);
+      setNow(now);
     }
     // console.log(event.target.textContent);
   }
@@ -45,7 +48,7 @@ function Body({ data }) {
       page: 1,
       size: 10,
       totalElements: 200,
-      totalPages: 14,
+      totalPages: 20,
     },
   };
 
@@ -76,6 +79,30 @@ function Body({ data }) {
       pages.push(i);
     }
     if (dummyPagenation.pageInfo.totalPages > 5) {
+      pages.push("...");
+      pages.push(dummyPagenation.pageInfo.totalPages);
+      pages.push("Next");
+    } else if (dummyPagenation.pageInfo.totalPages > Number(now)) {
+      pages.push("Next");
+    }
+  } else if (Number(now) >= 5) {
+    pages = ["Prev", 1, "..."];
+    for (
+      let i = Number(now) - 2;
+      i <= Math.min(Number(now) + 2, dummyPagenation.pageInfo.totalPages);
+      i++
+    ) {
+      pages.push(i);
+    }
+    if (dummyPagenation.pageInfo.totalPages === Number(now)) {
+    } else if (dummyPagenation.pageInfo.totalPages === Number(now) + 3) {
+      pages.pop();
+      pages.push(Number(now) + 3);
+      pages.push("Next");
+      // pages.push("...");
+      // pages.push(dummyPagenation.pageInfo.totalPages);
+      // pages.push("Next");
+    } else if (dummyPagenation.pageInfo.totalPages > Number(now) + 3) {
       pages.push("...");
       pages.push(dummyPagenation.pageInfo.totalPages);
       pages.push("Next");
@@ -143,7 +170,7 @@ function Body({ data }) {
           </div>
         ) : null}
         <div>
-          <div className="float-left">
+          <div className="pagenation">
             {pages.map((el) => (
               <a onClick={nowHandler} id={el} className="pageBox">
                 {el}
@@ -247,14 +274,17 @@ export const Main = styled.div`
 
     cursor: pointer;
   }
-  .pageBox {
-    font-size: 13px;
-    line-height: 25px;
-    height: 27px;
-    width: 25.2344px;
-    border: 1px solid #babfc4;
-    margin: 0 2px 0 2px;
-    padding: 0 8px 0 8px;
+  .pagenation {
+    margin: 20px;
+    .pageBox {
+      font-size: 13px;
+      line-height: 25px;
+      height: 27px;
+      width: 25.2344px;
+      border: 1px solid #babfc4;
+      margin: 0 2px 0 2px;
+      padding: 0 8px 0 8px;
+    }
   }
 `;
 
