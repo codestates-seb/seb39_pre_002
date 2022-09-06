@@ -57,9 +57,9 @@ public class Member {
     @Column(nullable = false, name = "LAST_MODIFIED_AT") //수정시간
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
-//    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member")
 //    @JsonIgnoreProperties({"question"})
-//    private List<Question> questions = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "member")
 //    @JsonIgnoreProperties({"answer"})

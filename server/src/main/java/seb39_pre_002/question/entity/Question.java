@@ -51,13 +51,13 @@ public class Question {
     @JsonIgnoreProperties({"question"})
     private List<Answer> answers = new ArrayList<>();
 
-//    @ManyToOne   // (1)
-//    @JoinColumn
-//    private Member member;
-//
-//    public void setMember(Member member) {
-//        this.member = member;
-//    }
+    @ManyToOne   // (1)
+    @JoinColumn
+    private Member member;
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 //
 //    public void setAnswer(Answer answer) {
 //        answers.add(answer);
