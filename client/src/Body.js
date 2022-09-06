@@ -8,6 +8,7 @@ function Body({ data }) {
   function handleClick(event, id) {}
   const [now, setNow] = useState(1);
   function nowHandler(event) {
+    // console.log(event.target.className);
     if (
       event.target.textContent === "Prev" &&
       event.target.textContent !== "1"
@@ -172,7 +173,13 @@ function Body({ data }) {
         <div>
           <div className="pagenation">
             {pages.map((el) => (
-              <a onClick={nowHandler} id={el} className="pageBox">
+              <a
+                onClick={nowHandler}
+                id={el}
+                className={`${el === "..." ? "none" : "pageBox"} ${
+                  el === now ? "now" : ""
+                }`}
+              >
                 {el}
               </a>
             ))}
@@ -280,8 +287,22 @@ export const Main = styled.div`
       font-size: 13px;
       line-height: 25px;
       height: 27px;
-      width: 25.2344px;
+      width: 25px;
       border: 1px solid #babfc4;
+      border-radius: 3px;
+      margin: 0 2px 0 2px;
+      padding: 0 8px 0 8px;
+    }
+    .now {
+      background-color: #f48225;
+      color: white;
+      border: 1px solid #f48225;
+    }
+    .none {
+      font-size: 13px;
+      line-height: 25px;
+      height: 27px;
+      width: 25px;
       margin: 0 2px 0 2px;
       padding: 0 8px 0 8px;
     }
