@@ -1,57 +1,71 @@
 import styled from "styled-components";
-import { useState } from "react";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { useState, useEffect} from "react";
 import Accordion from "./Accordion";
+import {useNavigate} from 'react-router-dom'
+import Editor from "./Editor";
+
+
 
 
 
     const CreateQuestion = () => {
 
-    const question_title = "title"
-    const question_content = "content"
+        const[questionTitle, setQuestionTitle] = useState('');
+        const[questionContent, setQuestionContent] = useState('');
+        
+        const[isPending, setIsPending] = useState(false);
+        const navigate = useNavigate();
+    
+        const handleSubmit = (event) => {
+            event.preventDefault();
+            const data = {questionTitle, questionContent,};
+    
+            setIsPending(true);
 
-    const[title, setTitle] = useState('');
-    const[body, setBody] = useState('');
+            // fetch("http://15.164.53.160:8080/v1/questions", {
+            fetch('http://localhost:3001/data', {
+                method: 'POST',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            }).then(() => {
+                console.log('new question added')
+                setIsPending(false)                
+                navigate('/');                
+            })  
+            
+        }
+        
+        useEffect(() =>{
 
+        },[questionTitle])
     
 
     return(
         <Container>
             <Div>
                 <h2>Ask a public question</h2>            
-                <section>
-                <form className="form">
+                <section >
+                <form className="form" onSubmit={handleSubmit}>
                     <label><strong>Title</strong></label>
                     <input
                         type="text"
                         required
-                        value={question_title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        value={questionTitle}
+                        onChange={(e) => setQuestionTitle(e.target.value)}
                         />
                     <label><strong>Body</strong></label>
-                    <CKEditor                                                                 
-                        editor={ ClassicEditor }
-                        data=""
-                        onReady={ editor => {
-                            // You can store the "editor" and use when it is needed.
-                            console.log( 'Editor is ready to use!', editor );
-                        } }
-                        onChange={ ( event, editor ) => {
-                            const data = editor.getData();
-                            console.log( { event, editor, data } );
-                        } }
-                        onBlur={ ( event, editor ) => {
-                            console.log( 'Blur.', editor );
-                        } }
-                        onFocus={ ( event, editor ) => {
-                            console.log( 'Focus.', editor );
-                        } }
-                        
-                        />
+                    {/* <textarea
+                        required
+                        value={questionContent}
+                        onChange={(e)=> setQuestionContent(e.target.value)}
+                    ></textarea> */}
+                    <Editor questionContent={questionContent} setQuestionContent={setQuestionContent} />                    
+                        { !isPending && <PostButton>Post Your Question</PostButton>   }
+                        { isPending && <PostButton disabled>Post Your Question</PostButton>   } 
                 </form>
-                </section>
-                <PostButton>Post Your Question</PostButton>
+                
+                </section>           
+                
             </Div>
             <Accordion />
         </Container>
@@ -100,17 +114,18 @@ const Div = styled.div`
                 margin: 20px 20px 10px 0px;
             }
 
-            input {    
+            input, textarea {    
                 border: 1px solid rgb(191,191,191);        
                 padding: 6px 10px;              
                 margin-bottom: 30px;                
             }
 
-            .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+            textarea {
                 min-height: 250px;
                 max-height: 250px;
-                margin-bottom: 20px;
-            }            
+            }
+
+                   
     `;
 
     const PostButton = styled.button`
@@ -121,7 +136,7 @@ const Div = styled.div`
         padding: 8px;
         cursor: pointer;
         margin-top: 50px;
-        margin-left: 100px;
+        margin-bottom: 30px;
         width: 150px;
     `;
     

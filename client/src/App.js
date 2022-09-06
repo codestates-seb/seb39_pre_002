@@ -18,6 +18,7 @@ function App() {
       })
       .then((data) => {
         setData(data[Object.keys(data)[0]]);
+        // setData(data);
       });
   }, []);
 
@@ -30,8 +31,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create" element={<CreateQuestion />} />
-          <Route path="/modify" element={<ModifyQuestion />} />
-          <Route path="/question/:id" element={<QuestionDetail />} />
+          <Route path="/questions/:id/modify" element={<ModifyQuestion />} />
+          <Route path="/questions/:id" element={<QuestionDetail />} />
         </Routes>
       </div>
     </BrowserRouter>
