@@ -1,26 +1,60 @@
 import styled from "styled-components";
-import { useState } from "react";
 import Sidebar from "./Sidebar";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ModifyQuestion = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const location = useLocation();
+  const data = location.state.data;
 
-  const question_title =
-    "Reactjs: Why doesn't state boolean lock on event listener?";
-  const question_content = `React Noob - thought I'd ask here for a quick answer before I spend hours digging.
+  const [questionContent, setQuestionContent] = useState({
+    questionTitle: data.questionTitle,
+    questionContent: data.questionContent,
+  });
 
-    In the example below I have an event listener inside useEffect that listens for scroll position on a container and fires a trigger after a point if it hasn't done so already.
-  
-    I want to know why the event still triggers even though the boolean registers true in the DOM. I've solved the problem by using a normal variable but I think it would benefit me to understand why this is happening. I've read lightly into mutating states and have experimented with changing the useState to an object like useState({status: false}) but this had similar results.
-  
-     Even a point in the direction of a reading topic would be enough. Cheers!`;
+  const { id } = useParams();
+  const navigate = useNavigate();
 
+  // const onClickEditButton = () => {
+  //   navigate(`/questions/${id}`)
+  //  }
+
+  // const [title, setTitle] = useState("")
+  // const [content, setContent] = useState("")
+
+  const submitModify = () => {
+    let reqPost = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: data.id,
+        questionTitle: questionContent.questionTitle,
+        questionContent: questionContent.questionContent,
+      }),
+    };
+    fetch(`http://localhost:3000/questions/${id}/modify`, reqPost)
+      .then((res) => {
+        console.log(res.json());
+        navigate("/");
+        return res.json();
+      })
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error.message));
+  };
+
+  const getValue = (e) => {
+    const { name, value } = e.target;
+    setQuestionContent({
+      ...questionContent,
+      [name]: value,
+    });
+  };
 
   return (
     <Body>
@@ -31,33 +65,36 @@ const ModifyQuestion = () => {
           <input
             type="text"
             required
-            value={question_title}
-            onChange={(e) => setTitle(e.target.value)}
-            />
+            placeholder={data.questionTitle}
+            onChange={(e) => getValue(e)}
+          />
           <label>Body</label>
-          <CKEditor                                                                   
-            editor={ ClassicEditor }
-            data=""
-            onReady={ editor => {
+          <CKEditor
+            editor={ClassicEditor}
+            data={data.questionContent}
+            onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
-              console.log( 'Editor is ready to use!', editor );
-            } }
-            onChange={ ( event, editor ) => {
+              console.log("Editor is ready to use!", editor);
+            }}
+            onChange={(event, editor) => {
+              // setQuestionContent(event.target.value)
               const data = editor.getData();
-              console.log( { event, editor, data } );
-            } }
-            onBlur={ ( event, editor ) => {
-              console.log( 'Blur.', editor );
-            } }
-            onFocus={ ( event, editor ) => {
-              console.log( 'Focus.', editor );
-            } }
-            />
+              setQuestionContent(data);
+              console.log({ event, editor, data });
+            }}
+          />
+          {/* <textarea
+            type="text"
+            required   
+            placeholder={data.questionContent}
+            onChange={(e) => setContent(e.target.value)}      
+          ></textarea> */}
+
           <div className="buttonContainer">
-            <PostButton>Save edits</PostButton>
+            <PostButton onClick={(e) => submitModify(e)}>Save edits</PostButton>
             <CancelButton>Cancel</CancelButton>
           </div>
-          </form>        
+        </form>
       </Div>
       <PostIt>
         <article className="postItTitle">How to Edit</article>
@@ -74,8 +111,6 @@ const ModifyQuestion = () => {
     </Body>
   );
 };
-
-
 
 const Body = styled.div`
   display: flex;
@@ -102,9 +137,10 @@ const Div = styled.div`
     margin: 50px 20px 10px 0px;
   }
 
-  input {    
-    border: 1px solid rgb(191,191,191);  
-    padding: 6px 10px;    
+  input,
+  textarea {
+    border: 1px solid rgb(191, 191, 191);
+    padding: 6px 10px;
   }
 
   textarea {
@@ -120,12 +156,11 @@ const Div = styled.div`
     display: flex;
     flex-direction: row;
   }
-
   .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-    min-height: 250px;
     max-height: 250px;
     margin-bottom: 20px;
-  }         
+    min-height: 250px;
+  }
 `;
 
 const PostButton = styled.button`
@@ -134,7 +169,7 @@ const PostButton = styled.button`
   border: 0;
   border-radius: 3px;
   padding: 8px;
-  cursor: pointer;  
+  cursor: pointer;
   margin-top: 50px;
   width: 100px;
   height: 40px;
@@ -151,32 +186,29 @@ const CancelButton = styled.button`
   height: 40px;
 `;
 
-  const PostIt = styled.div`
+const PostIt = styled.div`
+  box-shadow: 0.1rem 0.1rem 1rem #d1d2d3;
+  height: 190px;
+  min-width: 300px;
+  margin: 50px 30px 30px 30px;
+  display: flex;
+  flex-direction: column;
 
-    box-shadow: 0.1rem 0.1rem 1rem #D1D2D3;
-    height: 190px;
-    min-width: 300px;
-    margin: 50px 30px 30px 30px;
-    display: flex;
-    flex-direction: column;
+  .postItTitle {
+    border: 1px solid rgb(226, 215, 179);
+    padding: 10px 10px 10px 25px;
+    background-color: rgb(255, 244, 211);
+    margin-bottom: 0px;
+  }
 
-    .postItTitle {
-
-      border: 1px solid rgb(226, 215, 179);
-      padding: 10px 10px 10px 25px;
-      background-color: rgb(255, 244, 211);
-      margin-bottom: 0px;
-    }
-
-    .postItContent {
-
-      line-height: 180%;
-      font-size: 0.8rem;
-      border: 1px solid rgb(226, 215, 179);
-      height: 150px;
-      background-color: #FDF7E2;
-      margin-top: 0px;
-    }
-  `;
+  .postItContent {
+    line-height: 180%;
+    font-size: 0.8rem;
+    border: 1px solid rgb(226, 215, 179);
+    height: 150px;
+    background-color: #fdf7e2;
+    margin-top: 0px;
+  }
+`;
 
 export default ModifyQuestion;

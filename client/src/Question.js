@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 export default function Question({ data, key, handleClick }) {
   return (
     <Body key={key}>
-      <div class="left-box">
+      <div className="left-box">
         <div className="left-text" title="Score of 0">
-          <span>0</span>
+          <span>10</span>
           <span>votes</span>
         </div>
         <div className="left-text" title="0 answers">
@@ -21,7 +21,7 @@ export default function Question({ data, key, handleClick }) {
       </div>
       <div>
         <h3>
-          <Link to={`/questions/${data.questionId}`}>{data.questionTitle}</Link>
+          <Link to={`/questions/${data.id}`}>{data.questionTitle}</Link>
         </h3>
         <div className="body-bottom">
           {/* <div>
@@ -47,7 +47,7 @@ export default function Question({ data, key, handleClick }) {
           <div>
             <div>
               <a href="" className="name">
-                {/* {data.memberName} */}
+                {data.memberName}
               </a>
             </div>
 
@@ -59,10 +59,10 @@ export default function Question({ data, key, handleClick }) {
           </div>
 
           <time>
-            <a className="time" href="">
-              {/* {data.questionStatus} */}
+            {/* <a className="time" href="">
+              {data.questionStatus}
               <span title="postedTime">xx sec ago</span>
-            </a>
+            </a> */}
           </time>
         </div>
       </div>

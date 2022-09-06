@@ -2,9 +2,117 @@ import Question from "./Question";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { useState } from "react";
 
 function Body({ data }) {
   function handleClick(event, id) {}
+  const [now, setNow] = useState(1);
+  function nowHandler(event) {
+    // console.log(event.target.className);
+    if (
+      event.target.textContent === "Prev" &&
+      event.target.textContent !== "1"
+    ) {
+      setNow(now - 1);
+      // console.log(now - 1);
+    } else if (
+      event.target.textContent === "Next" &&
+      event.target.textContent !== dummyPagenation.pageInfo.totalPages
+    ) {
+      setNow(now + 1);
+      // console.log(now + 1);
+    } else if (Number(event.target.textContent)) {
+      setNow(Number(event.target.textContent));
+      // console.log(Number(event.target.textContent), 1);
+    } else {
+      // console.log(event.target.textContent, 2, now);
+      setNow(now);
+    }
+    // console.log(event.target.textContent);
+  }
+  let dummyPagenation = {
+    data: [
+      {
+        questionId: 1,
+        questionTitle: "제목",
+        questionContent: "내용",
+        memberId: "작성자id",
+      },
+      {
+        questionId: 2,
+        questionTitle: "제목1",
+        questionContent: "내용2",
+        memberId: "작정사Id",
+      },
+    ],
+    pageInfo: {
+      page: 1,
+      size: 10,
+      totalElements: 200,
+      totalPages: 20,
+    },
+  };
+
+  let pages = [];
+  if (Number(now) === 1) {
+    pages = [];
+    for (
+      let i = 1;
+      i <= Math.min(5, dummyPagenation.pageInfo.totalPages);
+      i++
+    ) {
+      pages.push(i);
+    }
+    if (dummyPagenation.pageInfo.totalPages > 5) {
+      pages.push("...");
+      pages.push(dummyPagenation.pageInfo.totalPages);
+      pages.push("Next");
+    } else if (dummyPagenation.pageInfo.totalPages > 1) {
+      pages.push("Next");
+    }
+  } else if (Number(now) <= 4) {
+    pages = ["Prev"];
+    for (
+      let i = 1;
+      i <= Math.min(5, dummyPagenation.pageInfo.totalPages);
+      i++
+    ) {
+      pages.push(i);
+    }
+    if (dummyPagenation.pageInfo.totalPages > 5) {
+      pages.push("...");
+      pages.push(dummyPagenation.pageInfo.totalPages);
+      pages.push("Next");
+    } else if (dummyPagenation.pageInfo.totalPages > Number(now)) {
+      pages.push("Next");
+    }
+  } else if (Number(now) >= 5) {
+    pages = ["Prev", 1, "..."];
+    for (
+      let i = Number(now) - 2;
+      i <= Math.min(Number(now) + 2, dummyPagenation.pageInfo.totalPages);
+      i++
+    ) {
+      pages.push(i);
+    }
+    if (dummyPagenation.pageInfo.totalPages === Number(now)) {
+    } else if (dummyPagenation.pageInfo.totalPages === Number(now) + 3) {
+      // pages.pop();
+      let anotherPage = pages.filter((el) => el !== Number(now) + -2);
+      pages = [...anotherPage];
+      pages.push(Number(now) + 3);
+      pages.push("Next");
+      // pages.push("...");
+      // pages.push(dummyPagenation.pageInfo.totalPages);
+      // pages.push("Next");
+    } else if (dummyPagenation.pageInfo.totalPages > Number(now) + 3) {
+      pages.push("...");
+      pages.push(dummyPagenation.pageInfo.totalPages);
+      pages.push("Next");
+    } else if (dummyPagenation.pageInfo.totalPages > Number(now)) {
+      pages.push("Next");
+    }
+  }
 
   return (
     <Main>
@@ -64,6 +172,21 @@ function Body({ data }) {
             ))}
           </div>
         ) : null}
+        <div>
+          <div className="pagenation">
+            {pages.map((el) => (
+              <a
+                onClick={nowHandler}
+                id={el}
+                className={`${el === "..." ? "none" : "pageBox"} ${
+                  el === now ? "now" : ""
+                }`}
+              >
+                {el}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </Main>
   );
@@ -159,6 +282,32 @@ export const Main = styled.div`
     padding: 10px 10px 10px 10px;
 
     cursor: pointer;
+  }
+  .pagenation {
+    margin: 20px;
+    .pageBox {
+      font-size: 13px;
+      line-height: 25px;
+      height: 27px;
+      width: 25px;
+      border: 1px solid #babfc4;
+      border-radius: 3px;
+      margin: 0 2px 0 2px;
+      padding: 0 8px 0 8px;
+    }
+    .now {
+      background-color: #f48225;
+      color: white;
+      border: 1px solid #f48225;
+    }
+    .none {
+      font-size: 13px;
+      line-height: 25px;
+      height: 27px;
+      width: 25px;
+      margin: 0 2px 0 2px;
+      padding: 0 8px 0 8px;
+    }
   }
 `;
 

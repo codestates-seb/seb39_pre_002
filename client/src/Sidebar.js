@@ -17,7 +17,6 @@ function Sidebar() {
               <li className="flex">
                 <div>
                   <svg
-                    aria-hidden="true"
                     width="18"
                     height="18"
                     viewBox="0 0 18 18"
@@ -35,7 +34,6 @@ function Sidebar() {
                 <div>COLLECTIVES</div>
                 <div>
                   <svg
-                    aria-hidden="true"
                     width="14"
                     height="14"
                     viewBox="0 0 14 14"
@@ -63,7 +61,6 @@ function Sidebar() {
                 <div>TEAMS</div>
                 <div>
                   <svg
-                    aria-hidden="true"
                     width="14"
                     height="14"
                     viewBox="0 0 14 14"
@@ -75,7 +72,6 @@ function Sidebar() {
               </li>
               <li>
                 <svg
-                  aria-hidden="true"
                   className="teams"
                   width="14"
                   height="14"
@@ -101,6 +97,7 @@ export const Main = styled.div`
   text-align: left;
   white-space: nowrap;
   word-spacing: 0px;
+  padding-right: 5px;
   ol {
     list-style: none;
     margin-top: 30px;

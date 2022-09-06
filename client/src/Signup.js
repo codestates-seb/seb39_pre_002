@@ -1,7 +1,74 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import botcheck from "./img/botcheck.png";
 
 function Signup() {
+  const idRegEx = /^[A-Za-z]{1}[A-Za-z0-9_-]{3,11}$/;
+  const passwordRegEx = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+
+  function linkToLogin() {
+    window.location.href = `http://localhost:3000/login`;
+  }
+  function postForm(username, password, email) {
+    fetch("http://15.164.53.160:8080/join", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // memberId,
+        username,
+        password,
+        email,
+      }),
+    }).then((res) => {
+      if (res.status === 201) {
+        linkToLogin();
+      }
+    });
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // const memberId = event.target[0].value;
+    const memberId = event.target[0].value;
+    const memberEmail = event.target[1].value;
+    const memberPassword = event.target[2].value;
+    let Error = [];
+    // if (memberId.match(idRegEx) === null) {
+    //   Error.push(
+    //     `Wrong ID : ${memberId}\nID should Start with caracter and 4~12 length`
+    //   );
+    // }
+    // if (memberPassword.match(passwordRegEx) === null) {
+    //   Error.push(
+    //     `Wrong password\npassword should have 1 caracter and 1 number and 1 special caracter with 8~16 length`
+    //   );
+    // }
+    if (memberId.match(idRegEx) === null) {
+      Error.push(
+        `Wrong ID : ${memberId}\nID should Start with caracter and 4~12 length`
+      );
+    }
+    if (memberPassword.match(passwordRegEx) === null) {
+      Error.push(
+        `Wrong password\npassword should have 1 caracter and 1 number and 1 special caracter with 8~16 length`
+      );
+    }
+    if (Error.length) {
+      alert(Error.join("\n\n"));
+      // console.log(Error.join("\n"));
+    }
+    if (!Error.length) {
+      alert(
+        `congratulation!  ${memberId}\nNow you can Log in to stackoverflow`
+      );
+      // linkToLogin(); // 아래 작업이 되어야 하지만 일단 post가 안되는 상황이라 로그인 이동만 체크
+      postForm(memberId, memberPassword, memberEmail);
+    }
+  };
+
   return (
     <Main>
       <div className="content">
@@ -112,7 +179,7 @@ function Signup() {
                 <span className="marginUp">Sign up with Facebook</span>
               </button>
             </div>
-            <div className="form">
+            <div className="form" onSubmit={handleSubmit}>
               <form>
                 <div>
                   <label className="input-text">Display name</label>
@@ -198,7 +265,7 @@ function Signup() {
               </div>
             </div>
             <div className="content-right-bottom-text">
-              Already have an account? <a>Log in</a>
+              Already have an account? <Link to={`/login`}>Log in</Link>
               <div>
                 Are you an employer?{" "}
                 <a>
@@ -280,6 +347,7 @@ export const Main = styled.div`
   }
   a {
     color: #0074cc;
+    text-decoration: none;
   }
   .marginUp {
     vertical-align: 4px;
@@ -300,8 +368,6 @@ export const Main = styled.div`
     border: 1px solid #d6d9dc;
     margin: 0px 0 4px 0;
     padding: 10px 10px 10px 10px;
-    min-height: auto;
-    min-width: auto;
     border-radius: 5px;
   }
 
@@ -310,17 +376,13 @@ export const Main = styled.div`
     line-height: 15px;
     text-decoration: none solid rgb(255, 255, 255);
     text-align: center;
-    word-spacing: 0px;
     background-color: #2f3337;
-    background-position: 0% 0%;
     color: #ffffff;
     height: 37px;
     width: 315px;
     border: 1px solid #d6d9dc;
     margin: 4px 0 4px 0;
     padding: 10px 10px 10px 10px;
-    min-height: auto;
-    min-width: auto;
     border-radius: 5px;
   }
   .top-facebook {
@@ -335,8 +397,6 @@ export const Main = styled.div`
     border: 1px solid #ffffff;
     margin: 4px 0 4px 0;
     padding: 10px 10px 10px 10px;
-    min-height: auto;
-    min-width: auto;
     border-radius: 5px;
   }
 
