@@ -14,6 +14,7 @@ const QuestionDetail = (  ) => {
 
   const navigate = useNavigate();
   const { id } = useParams();
+  
   const { data, error } = useFetch("http://localhost:3001/data/" + id);
   // const { data, error } = useFetch("http://15.164.53.160:8080/v1/questions/" + id);
 
@@ -74,7 +75,7 @@ const QuestionDetail = (  ) => {
             <hr></hr>
             {/* <section>{data.data.questionContent}</section> */}
             <section>{data.questionContent}</section>
-            <Link to="/questions/:id/modify">
+            <Link to={`/questions/${data.id}/modify`} state={{ data:data }}>
               <EditDeleteButton>Edit</EditDeleteButton>
             </Link>
             <EditDeleteButton onClick={handleDelete}>Delete</EditDeleteButton>

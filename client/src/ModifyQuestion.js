@@ -1,27 +1,74 @@
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
+import axios, { Axios } from "axios";
 
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {useNavigate} from 'react-router-dom'
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Editor from "./Editor";
 import { useParams } from "react-router-dom";
+import useFetch from "./useFetch";
+import { useLocation } from "react-router-dom";
 
 
 
 
 const ModifyQuestion = () => {
-  
-  const { id } = useParams();
-  const navigate= useNavigate();
 
-  const [questionTitle, setQuestionTitle] = useState('')
+  const location = useLocation()
+  const data = location.state.data
+
+  const [questionContent, setQuestionContent] = useState({
+    questionTitle: data.questionTitle,
+    questionContent: data.questionContent
+  })
+
+
   
-  function onClickEditButton() {
-    navigate(`/questions/${id}`)
-  }
+  const  {id}  = useParams();
+  const navigate= useNavigate();  
+  
+  // const onClickEditButton = () => {    
+  //   navigate(`/questions/${id}`)
+  //  }
+
+  
+  
+  // const [title, setTitle] = useState("")
+  // const [content, setContent] = useState("")
+
+  const submitModify = () => {
+    let reqPost = {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id: data.id,
+      questionTitle: questionContent.questionTitle,
+      questionContent: questionContent.questionContent
+    }),
+  };
+  fetch(
+    `http://localhost:3000/questions/${id}/modify`,
+    reqPost
+  )
+  .then((res) => {
+    console.log(res.json());
+    navigate('/');
+    return res.json()
+  })
+  .then((res)=> console.log(res))
+  .catch((error) => console.log(error.message))
+};
+
+const getValue = (e) => {
+  const { name, value } = e.target;
+  setQuestionContent({
+    ...questionContent,
+    [name]: value
+  })
+}
   
 
   return (
@@ -33,16 +80,35 @@ const ModifyQuestion = () => {
           <input
             type="text"
             required
-            value={questionTitle}
-            onChange={(e) => setQuestionTitle(e.target.value)}
+            placeholder={data.questionTitle}
+            onChange={(e) => getValue(e)}
             />
           <label>Body</label>
-          <textarea
-            required            
-          ></textarea>
-          {/* <Editor /> */}
+          <CKEditor                                                                                     
+                        editor={ ClassicEditor }
+                        data={data.questionContent}
+                        onReady={ editor => {
+                            // You can store the "editor" and use when it is needed.
+                            console.log( 'Editor is ready to use!', editor );
+                        } }
+                        onChange={ ( event, editor ) => {
+                            // setQuestionContent(event.target.value)
+                            const data = editor.getData();
+                            setQuestionContent(
+                                data                           
+                            )
+                            console.log( { event, editor, data } );
+                        } }                                   
+                        />
+          {/* <textarea
+            type="text"
+            required   
+            placeholder={data.questionContent}
+            onChange={(e) => setContent(e.target.value)}      
+          ></textarea> */}
+          
           <div className="buttonContainer">
-            <PostButton onClick={onClickEditButton}>Save edits</PostButton>
+            <PostButton onClick={(e) => submitModify(e)}>Save edits</PostButton>
             <CancelButton>Cancel</CancelButton>
           </div>
           </form>        
@@ -108,6 +174,11 @@ const Div = styled.div`
     display: flex;
     flex-direction: row;
   }
+  .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+    max-height: 250px;
+    margin-bottom: 20px;
+    min-height: 250px;
+}   
   
 `;
 
