@@ -11,14 +11,14 @@ import Login from "./Login";
 function App() {
   const [data, setData] = useState(null);
   useEffect(() => {
-    // fetch("http://localhost:3001/data")
-    fetch("http://15.164.53.160:8080/v1/questions")
+    fetch("http://localhost:3001/data")
+      // fetch("http://15.164.53.160:8080/v1/questions")
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        setData(data[Object.keys(data)[0]]);
-        // setData(data);
+        // setData(data[Object.keys(data)[0]]);
+        setData(data);
       });
   }, []);
 

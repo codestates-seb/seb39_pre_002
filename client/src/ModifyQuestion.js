@@ -13,11 +13,8 @@ const ModifyQuestion = () => {
   const location = useLocation();
   const data = location.state.data;
 
-  const [questionContent, setQuestionContent] = useState({
-    questionTitle: data.questionTitle,
-    questionContent: data.questionContent,
-  });
-
+  const [questionContent, setQuestionContent] = useState(data.questionContent);
+  const [title, setTitle] = useState(data.questionTitle);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -27,33 +24,48 @@ const ModifyQuestion = () => {
 
   // const [title, setTitle] = useState("")
   // const [content, setContent] = useState("")
-
+  function linkToLogin() {
+    window.location.href = `http://localhost:3000/`;
+  }
   const submitModify = () => {
-    let reqPost = {
+    // let reqPost = {
+    //   method: "PATCH",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     questionTitle: title,
+    //     questionContent: questionContent.questionContent,
+    //     questionStatus: "modified",
+    //   }),
+    // };
+    // fetch(`http://localhost:3001/data/${id}`, reqPost)
+    //   .then((res) => {
+    //     console.log(res.json());
+    //     navigate("/");
+    //     return res.json();
+    //   })
+    //   .then((res) => console.log(res))
+    //   .catch((error) => console.log(error.message));
+    fetch(`http://localhost:3001/data/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        id: data.id,
-        questionTitle: questionContent.questionTitle,
-        questionContent: questionContent.questionContent,
+        questionTitle: title,
+        questionContent: questionContent,
+        questionStatus: "modified",
       }),
-    };
-    fetch(`http://localhost:3000/questions/${id}/modify`, reqPost)
-      .then((res) => {
-        console.log(res.json());
-        navigate("/");
-        return res.json();
-      })
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error.message));
+    }).then((res) => {
+      linkToLogin();
+      if (res.status === 201) {
+      }
+    });
   };
 
   const getValue = (e) => {
-    const { name, value } = e.target;
-    setQuestionContent({
-      ...questionContent,
-      [name]: value,
-    });
+    let a = e.target.value;
+    setTitle(a);
   };
 
   return (
@@ -62,12 +74,7 @@ const ModifyQuestion = () => {
       <Div>
         <form className="form">
           <label>Title</label>
-          <input
-            type="text"
-            required
-            placeholder={data.questionTitle}
-            onChange={(e) => getValue(e)}
-          />
+          <input type="text" value={title} onChange={getValue} />
           <label>Body</label>
           <CKEditor
             editor={ClassicEditor}
@@ -78,9 +85,14 @@ const ModifyQuestion = () => {
             }}
             onChange={(event, editor) => {
               // setQuestionContent(event.target.value)
-              const data = editor.getData();
+              let data = editor
+                .getData()
+                .split("<p>")
+                .join("")
+                .split("</p>")
+                .join("");
+              console.log(data);
               setQuestionContent(data);
-              console.log({ event, editor, data });
             }}
           />
           {/* <textarea
@@ -91,7 +103,7 @@ const ModifyQuestion = () => {
           ></textarea> */}
 
           <div className="buttonContainer">
-            <PostButton onClick={(e) => submitModify(e)}>Save edits</PostButton>
+            <PostButton onClick={submitModify}>Save edits</PostButton>
             <CancelButton>Cancel</CancelButton>
           </div>
         </form>
