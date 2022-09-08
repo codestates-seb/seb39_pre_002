@@ -1,23 +1,26 @@
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+// import { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
-const ModifyQuestion = () => {
-  const location = useLocation();
-  const data = location.state.data;
-
-  const [questionContent, setQuestionContent] = useState(data.questionContent);
-  const [title, setTitle] = useState(data.questionTitle);
+const ModifyQuestion = ({ data }) => {
+  // const location = useLocation();
   const { id } = useParams();
-  const navigate = useNavigate();
 
+  // const data = location.state.data;
+  let dataNow = data.filter((el) => Number(el.questionId) === Number(id))[0];
+  const [title, setTitle] = useState(dataNow.questionTitle);
+  const [questionContent, setQuestionContent] = useState(
+    dataNow.questionContent
+  );
+  // const navigate = useNavigate();
   // const onClickEditButton = () => {
   //   navigate(`/questions/${id}`)
   //  }
@@ -25,8 +28,9 @@ const ModifyQuestion = () => {
   // const [title, setTitle] = useState("")
   // const [content, setContent] = useState("")
   function linkToLogin() {
-    window.location.href = `http://localhost:3000/`;
+    window.location.href = `http://localhost:3000`;
   }
+
   const submitModify = () => {
     // let reqPost = {
     //   method: "PATCH",
@@ -45,7 +49,8 @@ const ModifyQuestion = () => {
     //   })
     //   .then((res) => console.log(res))
     //   .catch((error) => console.log(error.message));
-    fetch(`http://localhost:3001/data/${id}`, {
+    fetch(`15.164.53.160:8080/v1/questions/${id}`, {
+      // fetch(`http://localhost:3001/data/${id}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -62,6 +67,7 @@ const ModifyQuestion = () => {
       }
     });
   };
+  console.log(title, questionContent, id);
 
   const getValue = (e) => {
     let a = e.target.value;
@@ -78,21 +84,21 @@ const ModifyQuestion = () => {
           <label>Body</label>
           <CKEditor
             editor={ClassicEditor}
-            data={data.questionContent}
+            data={dataNow.questionContent}
             onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
-              console.log("Editor is ready to use!", editor);
+              // console.log("Editor is ready to use!", editor);
             }}
             onChange={(event, editor) => {
               // setQuestionContent(event.target.value)
-              let data = editor
+              let some = editor
                 .getData()
                 .split("<p>")
                 .join("")
                 .split("</p>")
                 .join("");
-              console.log(data);
-              setQuestionContent(data);
+              // console.log(data);
+              setQuestionContent(some);
             }}
           />
           {/* <textarea

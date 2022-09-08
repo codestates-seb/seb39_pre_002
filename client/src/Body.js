@@ -97,14 +97,10 @@ function Body({ data }) {
     }
     if (dummyPagenation.pageInfo.totalPages === Number(now)) {
     } else if (dummyPagenation.pageInfo.totalPages === Number(now) + 3) {
-      // pages.pop();
       let anotherPage = pages.filter((el) => el !== Number(now) + -2);
       pages = [...anotherPage];
       pages.push(Number(now) + 3);
       pages.push("Next");
-      // pages.push("...");
-      // pages.push(dummyPagenation.pageInfo.totalPages);
-      // pages.push("Next");
     } else if (dummyPagenation.pageInfo.totalPages > Number(now) + 3) {
       pages.push("...");
       pages.push(dummyPagenation.pageInfo.totalPages);

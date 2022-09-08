@@ -2,56 +2,50 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 import Sidebar from "./Sidebar";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Editor from "./Editor";
 import Answer from "./Answer";
 import { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
-
-const QuestionDetail = (  ) => {
-
+const QuestionDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  
-  const { data, error } = useFetch("http://localhost:3001/data/" + id);
-  // const { data, error } = useFetch("http://15.164.53.160:8080/v1/questions/" + id);
+
+  // const { data, error } = useFetch("http://localhost:3001/data/" + id);
+  const { data, error } = useFetch(
+    `http://15.164.53.160:8080/v1/questions/${id}`
+  );
 
   const handleDelete = () => {
-    fetch('http://localhost:3001/data/' + data.id, {
-        method: 'DELETE'
-    }).then(()=> {
-        navigate('/')
-    })
-}
-  
+    fetch("http://15.164.53.160:8080/v1/questions/" + id, {
+      // fetch("http://localhost:3001/data/" + data.id, {
+      method: "DELETE",
+    }).then(() => {
+      navigate("/");
+    });
+  };
 
   const question_views = 0;
-
-  
 
   let now = new Date();
   let year = now.getFullYear();
   let month = now.getMonth();
   let date = now.getDate();
 
-
-  const [comment, setComment] = useState('');
-  const onChange = event => setComment(event.target.value);
+  const [comment, setComment] = useState("");
+  const onChange = (event) => setComment(event.target.value);
 
   const [commentArray, setCommentArray] = useState([]);
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
-    if (comment === '') {
+    if (comment === "") {
       return;
     }
-    setCommentArray(commentValueList => [comment, ...commentValueList]);
-    setComment('');
+    setCommentArray((commentValueList) => [comment, ...commentValueList]);
+    setComment("");
   };
-
- 
-
   return (
     <>
       {error && <div>{error}</div>}
@@ -59,8 +53,8 @@ const QuestionDetail = (  ) => {
         <Body>
           <Sidebar />
           <Div>
-            {/* <h2>{data.data.questionTitle}</h2> */}
-            <h2>{data.questionTitle}</h2>
+            <h2>{data.data.questionTitle}</h2>
+            {/* <h2>{data.questionTitle}</h2> */}
             <p>
               <span>
                 Asked <strong>{`${year}/${month}/${date}`}</strong>
@@ -73,49 +67,60 @@ const QuestionDetail = (  ) => {
               </span>
             </p>
             <hr></hr>
-            {/* <section>{data.data.questionContent}</section> */}
-            <section>{data.questionContent}</section>
-            <Link to={`/questions/${data.id}/modify`} state={{ data:data }}>
+            <section>{data.data.questionContent}</section>
+            {/* <section>{data.questionContent}</section> */}
+            {/* <Link to={`/questions/${data.id}/modify`} state={{ data: data }}> */}
+            <Link
+              to={`/questions/${id}/modify`}
+              // state={{ data: data }}
+            >
               <EditDeleteButton>Edit</EditDeleteButton>
             </Link>
             <EditDeleteButton onClick={handleDelete}>Delete</EditDeleteButton>
 
             <div className="answerContainer">
-              {commentArray.map((value, index) =>(
+              {commentArray.map((value, index) => (
                 <div key={index} className="answer">
                   {value} <span className="answerName">- junho01234</span>
                 </div>
               ))}
             </div>
-            
-            <form onSubmit={onSubmit}>          
-            <label>Your Answer</label>
-            <textarea
-              required
-              placeholder="답변을 입력해주세요"
-              value={comment}
-              onChange={onChange}
-            ></textarea>
-            {/* <Editor /> */}
-            <PostButton>Post Your Answer</PostButton>
-            </form> 
-          </Div>
 
+            <form onSubmit={onSubmit}>
+              <label>Your Answer</label>
+              <textarea
+                required
+                placeholder="답변을 입력해주세요"
+                value={comment}
+                onChange={onChange}
+              ></textarea>
+              {/* <Editor /> */}
+              <PostButton>Post Your Answer</PostButton>
+            </form>
+          </Div>
 
           <PostIt>
             <article className="postItTitle">The Overflow Blog</article>
             <article className="postItContent">
               <ul>
-                <li>Stack Overflow is launching a Student Ambassador program. Here’s how to apply.</li>
-                <li>What companies lose when they track worker productivity (Ep. 478)</li>                
+                <li>
+                  Stack Overflow is launching a Student Ambassador program.
+                  Here’s how to apply.
+                </li>
+                <li>
+                  What companies lose when they track worker productivity (Ep.
+                  478)
+                </li>
               </ul>
             </article>
             <article className="postItTitle">Featured on Meta</article>
             <article className="postItContent">
               <ul>
                 <li>Please welcome Valued Associate #1301 - Emerson</li>
-                <li>Announcing the Stack Overflow Student Ambassador Program</li>
-                <li>Should we burninate the [option] tag?</li>                  
+                <li>
+                  Announcing the Stack Overflow Student Ambassador Program
+                </li>
+                <li>Should we burninate the [option] tag?</li>
               </ul>
             </article>
           </PostIt>
@@ -124,9 +129,6 @@ const QuestionDetail = (  ) => {
     </>
   );
 };
-
-
-
 
 const Body = styled.div`
   display: flex;
@@ -171,9 +173,7 @@ const Div = styled.div`
   .answerName {
     color: hsl(206, 100%, 52%);
   }
-  
 `;
-
 
 const PostButton = styled.button`
   color: white;
@@ -194,33 +194,30 @@ const EditDeleteButton = styled.button`
 `;
 
 const PostIt = styled.div`
+  box-shadow: 0.1rem 0.1rem 1rem #d1d2d3;
+  height: 380px;
+  width: 300px;
+  min-width: 300px;
+  margin: 50px 30px 30px 30px;
+  display: flex;
+  flex-direction: column;
 
-    box-shadow: 0.1rem 0.1rem 1rem #D1D2D3;
-    height: 380px;
-    width: 300px;
-    min-width: 300px;
-    margin: 50px 30px 30px 30px;
-    display: flex;
-    flex-direction: column;
+  .postItTitle {
+    border: 1px solid rgb(226, 215, 179);
+    padding: 10px 10px 10px 25px;
+    background-color: rgb(255, 244, 211);
+    margin-bottom: 0px;
+  }
 
-    .postItTitle {
-
-      border: 1px solid rgb(226, 215, 179);
-      padding: 10px 10px 10px 25px;
-      background-color: rgb(255, 244, 211);
-      margin-bottom: 0px;
-    }
-
-    .postItContent {
-
-      line-height: 180%;
-      font-size: 0.8rem;
-      border: 1px solid rgb(226, 215, 179);
-      height: 150px;
-      background-color: #FDF7E2;
-      margin-top: 0px;
-      padding-right: 15px;
-    }
-  `;
+  .postItContent {
+    line-height: 180%;
+    font-size: 0.8rem;
+    border: 1px solid rgb(226, 215, 179);
+    height: 150px;
+    background-color: #fdf7e2;
+    margin-top: 0px;
+    padding-right: 15px;
+  }
+`;
 
 export default QuestionDetail;

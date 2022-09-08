@@ -11,14 +11,15 @@ import Login from "./Login";
 function App() {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:3001/data")
-      // fetch("http://15.164.53.160:8080/v1/questions")
+    // fetch("http://localhost:3001/data")
+    fetch("http://15.164.53.160:8080/v1/questions")
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        // setData(data[Object.keys(data)[0]]);
-        setData(data);
+        console.log(data);
+        setData(data[Object.keys(data)[0]]);
+        // setData(data);
       });
   }, []);
 
@@ -31,7 +32,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create" element={<CreateQuestion />} />
-          <Route path="/questions/:id/modify" element={<ModifyQuestion />} />
+          <Route
+            path="/questions/:id/modify"
+            element={<ModifyQuestion data={data} />}
+          />
           <Route path="/questions/:id" element={<QuestionDetail />} />
         </Routes>
       </div>
