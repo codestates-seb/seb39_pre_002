@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import useFetch from "./useFetch";
-import Sidebar from "./Sidebar";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import Editor from "./Editor";
-import Answer from "./Answer";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useFetch from "./useFetch.js";
+import Sidebar from "./Sidebar.js";
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import Editor from "./Editor";
+// import Answer from "./Answer";
 
 const QuestionDetail = () => {
   const navigate = useNavigate();

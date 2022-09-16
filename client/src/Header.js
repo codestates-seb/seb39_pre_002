@@ -8,7 +8,7 @@ function Header() {
       {isLogin === false ? (
         <Main>
           <div className="header-container">
-            <a className="flex align nonLogin-img">
+            <div className="flex align nonLogin-img">
               <span className="marginUp">
                 <Link to="/">
                   <svg width="150" height="30" viewBox="0 0 187 37">
@@ -24,7 +24,7 @@ function Header() {
                   </svg>
                 </Link>
               </span>
-            </a>
+            </div>
             <a className="products gray nonLogin">About</a>
             <a className="products gray nonLogin">Products</a>
             <a className="products gray nonLogin">For Teams</a>
@@ -53,7 +53,7 @@ function Header() {
       ) : (
         <Main>
           <div className="header-container">
-            <a className="flex align">
+            <div className="flex align">
               <span className="marginUp">
                 <Link to="/">
                   <svg width="150" height="30" viewBox="0 0 187 37">
@@ -69,7 +69,7 @@ function Header() {
                   </svg>
                 </Link>
               </span>
-            </a>
+            </div>
             <a className="products gray">Products</a>
             <div className="marginUp">
               <svg

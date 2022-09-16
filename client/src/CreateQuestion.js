@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import Accordion from "./Accordion";
 import { useNavigate } from "react-router-dom";
-import Editor from "./Editor";
+import Accordion from "./Accordion.js";
+import Editor from "./Editor.js";
 
 const CreateQuestion = () => {
   const [questionTitle, setQuestionTitle] = useState("");

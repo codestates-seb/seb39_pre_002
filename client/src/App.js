@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Body from "./Body";
-import Header from "./Header";
-import Signup from "./Signup";
-import CreateQuestion from "./CreateQuestion";
-import QuestionDetail from "./QuestionDetail";
-import ModifyQuestion from "./ModifyQuestion";
-import Login from "./Login";
+import Body from "./Body.js";
+import Header from "./Header.js";
+import Signup from "./Signup.js";
+import CreateQuestion from "./CreateQuestion.js";
+import QuestionDetail from "./QuestionDetail.js";
+import ModifyQuestion from "./ModifyQuestion.js";
+import Login from "./Login.js";
 
 function App() {
   const [data, setData] = useState(null);

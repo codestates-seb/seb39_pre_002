@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar.js";
 
 import { useState } from "react";
 // import { useState, useEffect } from "react";
@@ -20,6 +20,7 @@ const ModifyQuestion = ({ data }) => {
   const [questionContent, setQuestionContent] = useState(
     dataNow.questionContent
   );
+  console.log(title, questionContent);
   // const navigate = useNavigate();
   // const onClickEditButton = () => {
   //   navigate(`/questions/${id}`)
@@ -49,7 +50,7 @@ const ModifyQuestion = ({ data }) => {
     //   })
     //   .then((res) => console.log(res))
     //   .catch((error) => console.log(error.message));
-    fetch(`15.164.53.160:8080/v1/questions/${id}`, {
+    fetch(`http://15.164.53.160:8080/v1/questions/${id}`, {
       // fetch(`http://localhost:3001/data/${id}`, {
       method: "PATCH",
       headers: {
@@ -59,15 +60,25 @@ const ModifyQuestion = ({ data }) => {
       body: JSON.stringify({
         questionTitle: title,
         questionContent: questionContent,
-        questionStatus: "modified",
       }),
-    }).then((res) => {
-      linkToLogin();
-      if (res.status === 201) {
-      }
-    });
+    })
+      // .then((res) => {
+      //   return res.json();
+      // })
+      .then((res) => {
+        linkToLogin();
+        if (res.status === 200) {
+          alert(`15.164.53.160:8080/v1/questions/${id}`);
+        } else {
+          alert("can`t get 200");
+          linkToLogin();
+        }
+      })
+      .catch((e) => {
+        linkToLogin();
+        // alert(`${e}`);
+      });
   };
-  console.log(title, questionContent, id);
 
   const getValue = (e) => {
     let a = e.target.value;

@@ -10,7 +10,7 @@ function Signup() {
     window.location.href = `http://localhost:3000/login`;
   }
   function postForm(username, password, email) {
-    fetch("http://15.164.53.160:8080/join", {
+    fetch("http://15.164.53.160:8080/v1/members/join", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -77,7 +77,7 @@ function Signup() {
             <h1>Join the Stack Overflow community</h1>
             <div className="content-left-texts">
               <div>
-                <svg width="26" height="26" class="svg-icon mtn2">
+                <svg width="26" height="26">
                   <path
                     opacity=".5"
                     d="M4.2 4H22a2 2 0 012 2v11.8a3 3 0 002-2.8V5a3 3 0 00-3-3H7a3 3 0 00-2.8 2z"
@@ -89,7 +89,7 @@ function Signup() {
             </div>
             <div className="content-left-texts">
               <div>
-                <svg width="26" height="26" class="svg-icon mtn2">
+                <svg width="26" height="26">
                   <path d="M12 .7a2 2 0 013 0l8.5 9.6a1 1 0 01-.7 1.7H4.2a1 1 0 01-.7-1.7L12 .7z"></path>
                   <path
                     opacity=".5"
@@ -101,7 +101,7 @@ function Signup() {
             </div>
             <div className="content-left-texts">
               <div>
-                <svg width="26" height="26" class="svg-icon mtn2">
+                <svg width="26" height="26">
                   <path d="M14.8 3a2 2 0 00-1.4.6l-10 10a2 2 0 000 2.8l8.2 8.2c.8.8 2 .8 2.8 0l10-10c.4-.4.6-.9.6-1.4V5a2 2 0 00-2-2h-8.2zm5.2 7a2 2 0 110-4 2 2 0 010 4z"></path>
                   <path
                     opacity=".5"
@@ -113,7 +113,7 @@ function Signup() {
             </div>
             <div className="content-left-texts">
               <div>
-                <svg width="26" height="26" class="svg-icon mtn2">
+                <svg width="26" height="26">
                   <path d="M21 4V2H5v2H1v5c0 2 2 4 4 4v1c0 2.5 3 4 7 4v3H7s-1.2 2.3-1.2 3h14.4c0-.6-1.2-3-1.2-3h-5v-3c4 0 7-1.5 7-4v-1c2 0 4-2 4-4V4h-4zM5 11c-1 0-2-1-2-2V6h2v5zm11.5 2.7l-3.5-2-3.5 1.9L11 9.8 7.2 7.5h4.4L13 3.8l1.4 3.7h4L15.3 10l1.4 3.7h-.1zM23 9c0 1-1 2-2 2V6h2v3z"></path>
                 </svg>
               </div>
@@ -130,7 +130,6 @@ function Signup() {
               <button className="button-top top-google">
                 <svg
                   aria-hidden="true"
-                  class="native svg-icon iconGoogle"
                   width="18"
                   height="18"
                   viewBox="0 0 18 18"
@@ -164,13 +163,7 @@ function Signup() {
                 <span className="marginUp">Sign up with GitHub </span>
               </button>
               <button className="button-top top-facebook">
-                <svg
-                  aria-hidden="true"
-                  class="svg-icon iconFacebook"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                >
+                <svg width="18" height="18" viewBox="0 0 18 18">
                   <path
                     d="M3 1a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H3Zm6.55 16v-6.2H7.46V8.4h2.09V6.61c0-2.07 1.26-3.2 3.1-3.2.88 0 1.64.07 1.87.1v2.16h-1.29c-1 0-1.19.48-1.19 1.18V8.4h2.39l-.31 2.42h-2.08V17h-2.5Z"
                     fill="white"
@@ -195,13 +188,7 @@ function Signup() {
                 <div>
                   <label className="input-text">Email</label>
                   <div>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      size="30"
-                      maxlength="100"
-                    />
+                    <input type="email" id="email" name="email" size="30" />
                   </div>
                 </div>
                 <div>
@@ -214,7 +201,6 @@ function Signup() {
                       id="password"
                       name="password"
                       size="30"
-                      autocomplete="off"
                     />
                   </div>
                   <p className="password-text">
@@ -243,8 +229,6 @@ function Signup() {
                     </div>
                     <div>
                       <svg
-                        aria-hidden="true"
-                        class="svg-icon iconHelpSm"
                         width="14"
                         height="14"
                         viewBox="0 0 14 14"
@@ -272,7 +256,6 @@ function Signup() {
                   Sign up on Talent{" "}
                   <svg
                     aria-hidden="true"
-                    class="va-text-bottom sm:d-none svg-icon iconShareSm"
                     width="14"
                     height="14"
                     viewBox="0 0 14 14"
